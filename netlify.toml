@@ -11,10 +11,6 @@
     status = 200
     to = '/.netlify/functions/:splat'
 
-  [[redirects]]
-    from = '/*'
-    status = 200
-    to = '/index.html'
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.

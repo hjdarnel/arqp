@@ -8,7 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
     "@fast-csv/format": "^4.3.5",
+    "@mui/material": "^5.4.3",
     "@netlify/functions": "^1.0.0",
     "busboy": "^1.4.0",
     "cabrillo": "^0.1.0",
