@@ -9,7 +9,9 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import { mainListItems, secondaryListItems } from './listItems';
-import Dashboard from './Dashboard';
+import Scoreboard from './Scoreboard/Scoreboard';
+import { Route, Routes } from 'react-router-dom';
+import Submit from './Submit/Submit';
 
 const Copyright = (props: any) => {
   return (
@@ -72,7 +74,17 @@ const AppContent = () => {
             overflow: 'auto',
           }}
         >
-          <Dashboard></Dashboard>
+          <Routes>
+            <Route path="/submit" element={<Submit/>}>
+            </Route>
+            <Route path="/search" element={<Scoreboard/>}>
+            </Route>
+            <Route path="/export" element={<Scoreboard/>}>
+            </Route>
+            <Route path="/" element={<Scoreboard/>}>
+            </Route>
+          </Routes>
+
           <Copyright />
         </Box>
       </Box>
@@ -82,13 +94,13 @@ const AppContent = () => {
 
 const StyledAppContent = styled(AppContent)(() => ({
   margin: 0,
-  "font-family": ["-apple-system", "BlinkMacSystemFont", 'Segoe UI', 'Roboto', 'Oxygen',
+  "fontFamily": ["-apple-system", "BlinkMacSystemFont", 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     "sans-serif"],
-  "-webkit-font-smoothing": "antialiased",
-  "-moz-osx-font-smoothing": "grayscale"
+  "webkitFontSmoothing": "antialiased",
+  "mozOsxFontSmoothing": "grayscale"
 }));
 
 export default function App() {
-  return <AppContent />;
+  return <StyledAppContent />;
 }

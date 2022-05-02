@@ -7,7 +7,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 
-const DashboardContent = () => {
+const ScoreboardContent = () => {
   return (
     <Box
       component="main"
@@ -62,6 +62,6 @@ const DashboardContent = () => {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
+export default function Scoreboard() {
+  return <ScoreboardContent />;
 }

@@ -2,8 +2,21 @@ import { cabrilloToObject } from 'cabrillo';
 import { writeToBuffer } from '@fast-csv/format';
 import { Handler } from '@netlify/functions';
 import Busboy from 'busboy';
+interface Submission {
+  file?: {
+    content: string;
+    filename: {
+      filename: string;
+    };
+  };
+  callsign?: string;
+  email?: string;
+  power?: string;
+  assistance?: string;
+  multipleOperators?: string;
+}
 
-const parseMultipartForm = (event) => {
+const parseMultipartForm = (event): Promise<Submission> => {
   return new Promise((resolve) => {
     const fields = {};
 
@@ -38,8 +51,9 @@ const handler: Handler = async (event, context) => {
     if (event.httpMethod !== 'POST') return { statusCode: 404 };
     if (!event.body) throw new Error('Missing request body');
 
-    const bodyParsed: any = await parseMultipartForm(event);
+    const bodyParsed = await parseMultipartForm(event);
     if (!bodyParsed?.file) throw new Error('Missing required file');
+    console.log('Received request', { ...bodyParsed, file: 'omitted' });
 
     const cabrillo = Buffer.from(bodyParsed.file.content, 'base64').toString();
     const parsed = cabrilloToObject(cabrillo, { contest: 'NAQP' });
