@@ -115,13 +115,12 @@ export default function Submit() {
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <form onSubmit={handleSubmit}>
           <Paper sx={{ p: 2 }}>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              sx={{ mb: 2 }}
-            >
+            <Typography component="h2" variant="h6" color="primary">
               Contest Log Submission
+            </Typography>
+            <Typography color="text.secondary" sx={{ mb: 2 }}>
+              Results will be submitted to current contest (
+              {currentContest?.title})
             </Typography>
 
             <Grid container rowSpacing={3} columnSpacing={1}>
