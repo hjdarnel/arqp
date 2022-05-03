@@ -103,21 +103,6 @@ const handler: Handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify(created)
     };
-    // const csv = await writeToBuffer(parsed.QSO, { headers: true });
-
-    // return {
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Content-Type': 'text/csv',
-    //     'Content-Disposition': `attachment; filename="${body.file.filename.filename.replace(
-    //       /\.[^/.]+$/,
-    //       ''
-    //     )}.csv"`
-    //   },
-    //   statusCode: 200,
-    //   body: csv.toString('base64'),
-    //   isBase64Encoded: true
-    // };
   } catch (err: any) {
     console.error(err.message);
 

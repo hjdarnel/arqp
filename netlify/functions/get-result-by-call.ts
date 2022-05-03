@@ -21,8 +21,6 @@ const handler: Handler = async (event, context) => {
       };
     }
 
-    console.log(contestId, callsign);
-
     const result = await prisma.submission.findMany({
       where: {
         contestId: event.queryStringParameters['contestId'],
