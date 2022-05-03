@@ -20,9 +20,9 @@ import { getResult } from '../util/get-result-by-call';
 import Results from './Results';
 
 export default function Search() {
-  const [allContests, setAllContests] = useState([] as Contest[]);
-  const [selectedContest, setSelectedContest] = useState('');
-  const [selectedCall, setSelectedCall] = useState('');
+  const [allContests, setAllContests] = useState<Contest[]>();
+  const [selectedContest, setSelectedContest] = useState<string>('');
+  const [selectedCall, setSelectedCall] = useState<string>('');
   const [results, setResults] = useState<Submission[]>();
 
   useEffect(() => {

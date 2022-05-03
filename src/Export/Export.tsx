@@ -20,8 +20,8 @@ import React from 'react';
 
 export default function Export() {
   const navigate = useNavigate();
-  const [allContests, setAllContests] = useState([] as Contest[]);
-  const [selectedContest, setSelectedContest] = useState('');
+  const [allContests, setAllContests] = useState<Contest[]>();
+  const [selectedContest, setSelectedContest] = useState<string>('');
 
   const mapContests = () => {
     if (allContests)

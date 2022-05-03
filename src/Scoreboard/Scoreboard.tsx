@@ -13,7 +13,7 @@ import { Submission } from '@prisma/client';
 import Results from './Results';
 
 export default function Scoreboard() {
-  const [results, setResults] = useState([] as Submission[]);
+  const [results, setResults] = useState<Submission[]>([]);
 
   useEffect(() => {
     getContest()

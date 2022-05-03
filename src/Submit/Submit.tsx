@@ -16,7 +16,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FileInput from './FileInput';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { getContest } from '../util/get-contest';
 import { Contest } from '@prisma/client';
@@ -32,9 +32,9 @@ const defaultValues = {
 export default function Submit() {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [selectedFile, setSelectedFile] = useState({} as any);
-  const [isFilePicked, setIsFilePicked] = useState(false);
-  const [currentContest, setCurrentContest] = useState({} as Contest);
+  const [selectedFile, setSelectedFile] = useState<any>();
+  const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
+  const [currentContest, setCurrentContest] = useState<Contest>();
 
   useEffect(() => {
     getContest()

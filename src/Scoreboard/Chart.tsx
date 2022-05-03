@@ -13,10 +13,10 @@ import { Submission } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
 export default function Chart({ submissions }: { submissions: Submission[] }) {
-  const [data, setData] = useState([] as any);
+  const [data, setData] = useState<{ count: number; claimedScore: number }[]>();
 
   useEffect(() => {
-    const temp: any[] = [];
+    const temp: { count: number; claimedScore: number }[] = [];
 
     submissions.map((x) => {
       const index = temp.findIndex((e) => e.claimedScore === x.claimedScore);
