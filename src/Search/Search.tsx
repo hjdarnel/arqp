@@ -15,7 +15,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material';
 import { Contest } from '@prisma/client';
 import { getResult } from '../util/fetch-result';
@@ -41,7 +42,6 @@ export default function Search() {
     console.log(contest, call);
     if (!call || contest === '') return;
     getResult(contest, call).then((x) => setResults(x));
-    console.log(results);
   };
 
   const contestChangeHandler = (event: any) => {
@@ -84,52 +84,55 @@ export default function Search() {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
-          {/* Chart */}
           <Grid item xs={7}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 100
+                height: 'auto'
               }}
             >
-              <form>
-                <TextField
-                  label="Callsign"
-                  helperText="Call Sign Used During Contest"
-                  variant="filled"
-                  required
-                  onChange={handleUpdate}
-                  name="callsign"
-                />
-              </form>
-            </Paper>
-          </Grid>
-          {/* Recent Deposits */}
-          <Grid item xs={5}>
-            <Paper
-              sx={{
-                p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                height: 100
-              }}
-            >
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Select Contest
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={selectedContest}
-                  label="Select Contest"
-                  onChange={contestChangeHandler}
-                >
-                  {mapContests()}
-                </Select>
-              </FormControl>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                sx={{ mb: 2 }}
+              >
+                Search Results
+              </Typography>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: 2
+                }}
+              >
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <TextField
+                    label="Callsign"
+                    helperText="Call Sign Used During Contest"
+                    onChange={handleUpdate}
+                    name="callsign"
+                  />
+                </form>
+
+                <FormControl sx={{ width: '300px' }}>
+                  <InputLabel id="contest-select-label">
+                    Select Contest
+                  </InputLabel>
+                  <Select
+                    labelId="contest-select-label"
+                    id="contest-select"
+                    value={selectedContest}
+                    label="Select Contest"
+                    onChange={contestChangeHandler}
+                  >
+                    {mapContests()}
+                  </Select>
+                </FormControl>
+              </Box>
             </Paper>
           </Grid>
           {/* Recent Orders */}
