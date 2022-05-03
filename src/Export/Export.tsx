@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { getAllContests } from '../util/get-all-contests';
 import {
@@ -11,19 +11,39 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  TextField,
   Typography,
   Button
 } from '@mui/material';
 import { Contest } from '@prisma/client';
-import { getResult } from '../util/get-result';
-import Results from './Results';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
-export default function Search() {
+export default function Export() {
+  const navigate = useNavigate();
   const [allContests, setAllContests] = useState([] as Contest[]);
   const [selectedContest, setSelectedContest] = useState('');
-  const [selectedCall, setSelectedCall] = useState('');
-  const [results, setResults] = useState();
+
+  const mapContests = () => {
+    if (allContests)
+      return (allContests as Contest[]).map((x) => {
+        return (
+          <MenuItem key={x.id} value={x.id}>
+            {x.title}
+          </MenuItem>
+        );
+      });
+  };
+
+  const fetchResults = (e: any) => {
+    e.preventDefault();
+
+    location.assign(
+      '/api/export-contest?' +
+        new URLSearchParams({
+          contestId: selectedContest
+        })
+    );
+  };
 
   useEffect(() => {
     getAllContests()
@@ -39,33 +59,8 @@ export default function Search() {
       });
   }, []);
 
-  const fetchResults = (e: any) => {
-    e.preventDefault();
-
-    if (!selectedCall || selectedContest === '') return;
-    getResult(selectedContest, selectedCall).then((x) => setResults(x));
-  };
-
   const contestChangeHandler = (event: any) => {
     setSelectedContest(event.target.value);
-  };
-
-  const mapContests = () => {
-    if (allContests)
-      return (allContests as Contest[]).map((x) => {
-        return (
-          <MenuItem key={x.id} value={x.id}>
-            {x.title}
-          </MenuItem>
-        );
-      });
-  };
-
-  const handleUpdate = (e: any) => {
-    e.preventDefault();
-    if (e && e.target && e.target.value) {
-      setSelectedCall(e.target.value);
-    }
   };
 
   return (
@@ -99,8 +94,9 @@ export default function Search() {
                 color="primary"
                 sx={{ mb: 2 }}
               >
-                Search Results
+                Export Contest Results
               </Typography>
+
               <form onSubmit={fetchResults}>
                 <Box
                   sx={{
@@ -109,13 +105,6 @@ export default function Search() {
                     gap: 2
                   }}
                 >
-                  <TextField
-                    label="Callsign"
-                    helperText="Call Sign Used During Contest"
-                    onChange={handleUpdate}
-                    name="callsign"
-                  />
-
                   <FormControl sx={{ width: '300px' }}>
                     <InputLabel id="contest-select-label">
                       Select Contest
@@ -130,30 +119,26 @@ export default function Search() {
                       {mapContests()}
                     </Select>
                   </FormControl>
-
                   <Button
                     sx={{ height: '56px' }}
-                    type="submit"
+                    onClick={fetchResults}
                     variant="contained"
                     color="success"
                   >
-                    Submit
+                    Export
                   </Button>
                 </Box>
               </form>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                align="left"
+                sx={{ mt: 2 }}
+              >
+                Select a contest to export the entire result set as a CSV.
+              </Typography>
             </Paper>
           </Grid>
-
-          {/* Results */}
-          {results ? (
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2 }}>
-                <Results data={results} />
-              </Paper>
-            </Grid>
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
         </Grid>
       </Container>
     </Box>

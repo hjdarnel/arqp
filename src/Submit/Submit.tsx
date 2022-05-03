@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import FileInput from './FileInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { getContest } from '../util/fetch-contest';
+import { getContest } from '../util/get-contest';
 import { Contest } from '@prisma/client';
 
 const defaultValues = {

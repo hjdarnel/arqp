@@ -1,11 +1,6 @@
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './Title';
 import { Submission } from '@prisma/client';
-import toast from 'react-hot-toast';
-import { getContest } from '../util/fetch-contest';
-import { getAllResultsByContest } from '../util/fetch-all-results-by-contest';
-import { useState } from 'react';
 import React from 'react';
 
 export default function Overview({

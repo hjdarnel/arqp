@@ -13,6 +13,7 @@ import Scoreboard from './Scoreboard/Scoreboard';
 import { Route, Routes } from 'react-router-dom';
 import Submit from './Submit/Submit';
 import Search from './Search/Search';
+import Export from './Export/Export';
 
 const Copyright = (props: any) => {
   return (
@@ -96,7 +97,7 @@ const AppContent = () => {
           <Routes>
             <Route path="/submit" element={<Submit />}></Route>
             <Route path="/search" element={<Search />}></Route>
-            <Route path="/export" element={<Scoreboard />}></Route>
+            <Route path="/export" element={<Export />}></Route>
             <Route path="/" element={<Scoreboard />}></Route>
           </Routes>
         </Box>

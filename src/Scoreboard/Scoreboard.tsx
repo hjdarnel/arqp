@@ -4,12 +4,11 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Chart from './Chart';
-import Orders from './Results';
 import Overview from './Overview';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { getAllResultsByContest } from '../util/fetch-all-results-by-contest';
-import { getContest } from '../util/fetch-contest';
+import { getAllResultsByContest } from '../util/get-all-results-by-contest';
+import { getContest } from '../util/get-contest';
 import { Submission } from '@prisma/client';
 import Results from './Results';
 
