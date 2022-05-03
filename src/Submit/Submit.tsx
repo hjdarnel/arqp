@@ -16,6 +16,8 @@ import {
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import FileInput from './FileInput';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const defaultValues = {
   callsign: '',
@@ -26,6 +28,7 @@ const defaultValues = {
 };
 
 export default function Submit() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState(defaultValues);
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -62,11 +65,23 @@ export default function Submit() {
       method: 'POST',
       body: formData
     })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('Success:', result);
+      .then((response) => {
+        if (response.status < 400) {
+          toast.success('Successfully submitted!', { duration: 6000 });
+          navigate('/');
+        } else {
+          toast.error(
+            'Error submitting log. Please contact arkansasqsoparty@gmail.com for help!',
+            { duration: 10000 }
+          );
+          console.error('Error:', response);
+        }
       })
       .catch((error) => {
+        toast.error(
+          'Error submitting log. Please contact arkansasqsoparty@gmail.com for help!',
+          { duration: 10000 }
+        );
         console.error('Error:', error);
       });
   };

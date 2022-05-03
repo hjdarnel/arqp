@@ -1,0 +1,88 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedIndexes"]
+}
+
+model Contest {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  timeStart   DateTime     @default(now())
+  timeEnd     DateTime     @default(now())
+  submissions Submission[]
+
+  @@index([title, timeStart(sort: Desc)])
+}
+
+model Submission {
+
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  contest           Contest      @relation(fields: [contestId], references: [id])
+  contestId         String       @db.ObjectId
+  callsign          String       @unique
+  email             String       @unique
+  power             String
+  assistance        Boolean      @default(false)
+  multipleOperators Boolean      @default(false)
+  claimedScore      Int          @default(0)
+  name              String
+  club              String
+  location          String?
+  logEmail          String?
+  logOperator       Operator?
+  logStation        Station?
+  logTransmitter    Transmitter?
+  logPower          Power?
+  logAssisted       Boolean?
+  logBand           String?
+  logMode           Mode?
+  created_at        DateTime     @default(now())
+  @@index([callsign, created_at(sort: Desc)])
+}
+
+enum Power {
+  HIGH
+  LOW
+  QRP
+}
+
+enum Transmitter {
+  ONE
+  TWO
+  LIMITED
+  UNLIMITED
+  SWL
+}
+
+enum Operator {
+  SINGLE
+  MULTI
+  CHECKLOG
+}
+
+enum Station {
+  DISTRIBUTED
+  FIXED
+  MOBILE
+  PORTABLE
+  ROVER
+  ROVER_LIMITED
+  ROVER_UNLIMITED
+  EXPEDITION
+  HQ
+  SCHOOL
+  EXPLORER
+}
+
+enum Mode {
+  CW
+  DIGI
+  FM
+  RTTY
+  SSB
+  MIXED
+}

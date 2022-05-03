@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "prestart:dev": "prisma migrade dev && prisma generate",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -14,10 +15,12 @@
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.3",
     "@netlify/functions": "^1.0.0",
+    "@prisma/client": "~3.13.0",
     "busboy": "^1.4.0",
     "cabrillo": "^0.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "~2.2.0",
     "react-router-dom": "~6.3.0",
     "recharts": "^2.1.9"
   },
@@ -26,6 +29,7 @@
     "@types/react-dom": "^17.0.10",
     "@types/react-router-dom": "~5.3.3",
     "@vitejs/plugin-react": "^1.0.7",
+    "prisma": "~3.13.0",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   }
