@@ -23,6 +23,17 @@ export default function Overview({
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Total Score
       </Typography>
+      <Typography component="p" variant="h4">
+        {submissions.length
+          ? Math.round(
+              submissions.reduce((a, b) => a + b.claimedScore, 0) /
+                submissions.length
+            )
+          : 0}
+      </Typography>
+      <Typography color="text.secondary" sx={{ flex: 1 }}>
+        Average Score
+      </Typography>
     </React.Fragment>
   );
 }

@@ -118,7 +118,12 @@ export default function Submit() {
             <Typography component="h2" variant="h6" color="primary">
               Contest Log Submission
             </Typography>
-            <Typography color="text.secondary" sx={{ mb: 2 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              align="left"
+              sx={{ mb: 2 }}
+            >
               Results will be submitted to current contest (
               {currentContest?.title})
             </Typography>

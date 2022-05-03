@@ -50,7 +50,7 @@ export default function Scoreboard() {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240
+                height: 340
               }}
             >
               <Chart submissions={results} />
@@ -63,7 +63,7 @@ export default function Scoreboard() {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240
+                height: 340
               }}
             >
               <Overview submissions={results || []} />
