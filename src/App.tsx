@@ -12,10 +12,16 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Scoreboard from './Scoreboard/Scoreboard';
 import { Route, Routes } from 'react-router-dom';
 import Submit from './Submit/Submit';
+import Search from './Search/Search';
 
 const Copyright = (props: any) => {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
       <Link color="inherit" href="https://github.com/hjdarnel">
         Henry Darnell
@@ -24,23 +30,33 @@ const Copyright = (props: any) => {
       {'.'}
     </Typography>
   );
-}
+};
 
 const mdTheme = createTheme({
   palette: {
-    primary: red,
+    primary: red
   },
   typography: {
-    fontFamily: ["-apple-system", "BlinkMacSystemFont", 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    "sans-serif"].join(',')
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif'
+    ].join(',')
   }
 });
 
 const AppContent = () => {
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex'}}>
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <MuiAppBar position="absolute">
           <Toolbar>
@@ -57,7 +73,7 @@ const AppContent = () => {
         </MuiAppBar>
         <Divider />
         <List component="nav">
-          <Toolbar/>
+          <Toolbar />
           {mainListItems}
           <Divider sx={{ my: 1 }} />
           {secondaryListItems}
@@ -71,18 +87,14 @@ const AppContent = () => {
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
-            overflow: 'auto',
+            overflow: 'auto'
           }}
         >
           <Routes>
-            <Route path="/submit" element={<Submit/>}>
-            </Route>
-            <Route path="/search" element={<Scoreboard/>}>
-            </Route>
-            <Route path="/export" element={<Scoreboard/>}>
-            </Route>
-            <Route path="/" element={<Scoreboard/>}>
-            </Route>
+            <Route path="/submit" element={<Submit />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+            <Route path="/export" element={<Scoreboard />}></Route>
+            <Route path="/" element={<Scoreboard />}></Route>
           </Routes>
 
           <Copyright />
@@ -90,15 +102,25 @@ const AppContent = () => {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 const StyledAppContent = styled(AppContent)(() => ({
   margin: 0,
-  "fontFamily": ["-apple-system", "BlinkMacSystemFont", 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    "sans-serif"],
-  "webkitFontSmoothing": "antialiased",
-  "mozOsxFontSmoothing": "grayscale"
+  fontFamily: [
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    'sans-serif'
+  ],
+  webkitFontSmoothing: 'antialiased',
+  mozOsxFontSmoothing: 'grayscale'
 }));
 
 export default function App() {

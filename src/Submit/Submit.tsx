@@ -14,10 +14,11 @@ import {
   Typography
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FileInput from './FileInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { getContest } from '../util/fetch-contest';
 
 const defaultValues = {
   callsign: '',
@@ -32,6 +33,19 @@ export default function Submit() {
   const [formValues, setFormValues] = useState(defaultValues);
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [currentContest, setCurrentContest] = useState();
+
+  useEffect(() => {
+    getContest()
+      .then((response) => setCurrentContest(response as any))
+      .catch(() => {
+        toast.error(
+          'Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help.',
+          { duration: 6000 }
+        );
+        return navigate('/');
+      });
+  }, []);
 
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -48,8 +62,9 @@ export default function Submit() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!selectedFile) return;
+    if (!selectedFile || !currentContest) return;
     const formData = new FormData();
+    formData.append('contestId', (currentContest as any).id);
 
     Object.entries(formValues).map(([k, v]) => {
       formData.append(k, v);
@@ -65,24 +80,20 @@ export default function Submit() {
       method: 'POST',
       body: formData
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.status < 400) {
           toast.success('Successfully submitted!', { duration: 6000 });
           navigate('/');
         } else {
-          toast.error(
-            'Error submitting log. Please contact arkansasqsoparty@gmail.com for help!',
-            { duration: 10000 }
-          );
-          console.error('Error:', response);
+          throw new Error(await response.text());
         }
       })
       .catch((error) => {
         toast.error(
-          'Error submitting log. Please contact arkansasqsoparty@gmail.com for help!',
+          `Error submitting log. Please contact arkansasqsoparty@gmail.com for help! ${error}`,
           { duration: 10000 }
         );
-        console.error('Error:', error);
+        console.error(error);
       });
   };
 

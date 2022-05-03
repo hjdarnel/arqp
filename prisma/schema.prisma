@@ -23,14 +23,14 @@ model Submission {
   id                String       @id @default(auto()) @map("_id") @db.ObjectId
   contest           Contest      @relation(fields: [contestId], references: [id])
   contestId         String       @db.ObjectId
-  callsign          String       @unique
-  email             String       @unique
+  callsign          String
+  email             String
   power             String
   assistance        Boolean      @default(false)
   multipleOperators Boolean      @default(false)
   claimedScore      Int          @default(0)
-  name              String
-  club              String
+  name              String?
+  club              String?
   location          String?
   logEmail          String?
   logOperator       Operator?
@@ -41,7 +41,8 @@ model Submission {
   logBand           String?
   logMode           Mode?
   created_at        DateTime     @default(now())
-  @@index([callsign, created_at(sort: Desc)])
+  @@unique([callsign, contestId])
+  @@index([callsign, contestId, created_at(sort: Desc)])
 }
 
 enum Power {
