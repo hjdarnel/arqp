@@ -18,7 +18,6 @@ import { Submission } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
 export default function Chart({ submissions }: { submissions: Submission[] }) {
-  const theme = useTheme();
   const [data, setData] = useState([] as any);
 
   useEffect(() => {
@@ -26,12 +25,13 @@ export default function Chart({ submissions }: { submissions: Submission[] }) {
 
     submissions.map((x) => {
       const index = temp.findIndex((e) => e.claimedScore === x.claimedScore);
-      if (index < 0)
-        return temp.push({ count: 1, claimedScore: x.claimedScore });
-      temp[index] = {
-        count: temp[index].count + 1,
-        claimedScore: x.claimedScore
-      };
+      if (index < 0) temp.push({ count: 1, claimedScore: x.claimedScore });
+      else {
+        temp[index] = {
+          count: temp[index].count + 1,
+          claimedScore: x.claimedScore
+        };
+      }
     });
 
     temp.sort((a, b) => a.claimedScore - b.claimedScore);
@@ -42,7 +42,7 @@ export default function Chart({ submissions }: { submissions: Submission[] }) {
     <React.Fragment>
       <Title>Scores</Title>
       <ResponsiveContainer>
-        <BarChart width={730} height={250} data={data}>
+        <BarChart width={730} height={250} data={data} maxBarSize={40}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             dataKey="claimedScore"
