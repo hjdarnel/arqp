@@ -19,6 +19,7 @@ import FileInput from './FileInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { getContest } from '../util/fetch-contest';
+import { Contest } from '@prisma/client';
 
 const defaultValues = {
   callsign: '',
@@ -31,13 +32,13 @@ const defaultValues = {
 export default function Submit() {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState({} as any);
   const [isFilePicked, setIsFilePicked] = useState(false);
-  const [currentContest, setCurrentContest] = useState();
+  const [currentContest, setCurrentContest] = useState({} as Contest);
 
   useEffect(() => {
     getContest()
-      .then((response) => setCurrentContest(response as any))
+      .then((response) => setCurrentContest(response))
       .catch(() => {
         toast.error(
           'Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help.',
@@ -64,7 +65,7 @@ export default function Submit() {
     e.preventDefault();
     if (!selectedFile || !currentContest) return;
     const formData = new FormData();
-    formData.append('contestId', (currentContest as any).id);
+    formData.append('contestId', currentContest.id);
 
     Object.entries(formValues).map(([k, v]) => {
       formData.append(k, v);
@@ -72,8 +73,8 @@ export default function Submit() {
 
     formData.append(
       'file',
-      new Blob([selectedFile], { type: (selectedFile as any).type }),
-      (selectedFile as any).name
+      new Blob([selectedFile], { type: selectedFile.type }),
+      selectedFile.name
     );
 
     fetch('/api/parse', {

@@ -4,10 +4,30 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import Orders from './Results';
+import Overview from './Overview';
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { getAllResultsByContest } from '../util/fetch-all-results-by-contest';
+import { getContest } from '../util/fetch-contest';
+import { Submission } from '@prisma/client';
+import Results from './Results';
 
-const ScoreboardContent = () => {
+export default function Scoreboard() {
+  const [results, setResults] = useState([] as Submission[]);
+
+  useEffect(() => {
+    getContest()
+      .then((response) => getAllResultsByContest(response.id))
+      .then((results) => setResults(results))
+      .catch(() => {
+        toast.error(
+          'Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help.',
+          { duration: 6000 }
+        );
+      });
+  }, []);
+
   return (
     <Box
       component="main"
@@ -18,7 +38,7 @@ const ScoreboardContent = () => {
             : theme.palette.grey[900],
         flexGrow: 1,
         height: 'auto',
-        overflow: 'auto',
+        overflow: 'auto'
       }}
     >
       <Toolbar />
@@ -31,10 +51,10 @@ const ScoreboardContent = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: 240
               }}
             >
-              <Chart />
+              <Chart submissions={results} />
             </Paper>
           </Grid>
           {/* Recent Deposits */}
@@ -44,24 +64,20 @@ const ScoreboardContent = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: 240
               }}
             >
-              <Deposits />
+              <Overview submissions={results || []} />
             </Paper>
           </Grid>
           {/* Recent Orders */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Orders />
+              <Results submissions={results} />
             </Paper>
           </Grid>
         </Grid>
       </Container>
     </Box>
   );
-}
-
-export default function Scoreboard() {
-  return <ScoreboardContent />;
 }

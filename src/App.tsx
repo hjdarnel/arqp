@@ -16,19 +16,21 @@ import Search from './Search/Search';
 
 const Copyright = (props: any) => {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/hjdarnel">
-        Henry Darnell
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <Box sx={{ position: 'absolute', width: '100%', bottom: 0, p: 2 }}>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {'Copyright © '}
+        <br />
+        <Link color="inherit" href="https://github.com/hjdarnel">
+          Henry Darnell
+        </Link>{' '}
+        {new Date().getFullYear()}
+      </Typography>
+    </Box>
   );
 };
 
@@ -77,6 +79,7 @@ const AppContent = () => {
           {mainListItems}
           <Divider sx={{ my: 1 }} />
           {secondaryListItems}
+          <Copyright />
         </List>
         <Box
           component="main"
@@ -96,8 +99,6 @@ const AppContent = () => {
             <Route path="/export" element={<Scoreboard />}></Route>
             <Route path="/" element={<Scoreboard />}></Route>
           </Routes>
-
-          <Copyright />
         </Box>
       </Box>
     </ThemeProvider>
