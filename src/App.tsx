@@ -37,7 +37,8 @@ const Copyright = (props: any) => {
 
 const mdTheme = createTheme({
   palette: {
-    primary: red
+    primary: { main: '#BF2441' },
+    secondary: { main: '#bf5524' }
   },
   typography: {
     fontFamily: [

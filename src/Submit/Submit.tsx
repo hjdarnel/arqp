@@ -240,7 +240,7 @@ export default function Submit() {
                   to="/"
                   type="submit"
                   variant="outlined"
-                  color="warning"
+                  color="secondary"
                 >
                   Cancel
                 </Button>

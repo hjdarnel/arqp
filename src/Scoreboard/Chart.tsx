@@ -48,7 +48,7 @@ export default function Chart({ submissions }: { submissions: Submission[] }) {
           />
           <Tooltip />
           <YAxis dataKey="count" type="number" hide />
-          <Bar dataKey="count" name="Count" fill="#1976d2" />
+          <Bar dataKey="count" name="Count" fill="#448AFF" />
         </BarChart>
       </ResponsiveContainer>
     </React.Fragment>
