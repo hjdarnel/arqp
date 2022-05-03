@@ -3,7 +3,7 @@ import { Contest, Submission } from '@prisma/client';
 export const getResult = async (
   contestId: string,
   callsign: string
-): Promise<any> => {
+): Promise<Submission[]> => {
   return fetch(
     '/api/get-result-by-call?' +
       new URLSearchParams({

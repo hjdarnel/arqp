@@ -25,7 +25,7 @@ const createRows = (data: any) => {
   return [];
 };
 
-export default function Results({ data }: { data: Submission }) {
+export default function Results({ data }: { data: Submission[] }) {
   return (
     <React.Fragment>
       <Typography component="h2" variant="h6" color="primary" sx={{ mb: 2 }}>
@@ -48,22 +48,24 @@ export default function Results({ data }: { data: Submission }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align="right">{data.callsign}</TableCell>
-              <TableCell align="right">{data.claimedScore}</TableCell>
-              <TableCell align="right">{data.power}W</TableCell>
-              <TableCell align="right">{data.logBand}</TableCell>
-              <TableCell align="right">{data.logMode}</TableCell>
-              <TableCell align="right">{data.club}</TableCell>
-              <TableCell align="right">{data.location}</TableCell>
-              <TableCell align="right">
-                {data.multipleOperators ? 'Yes' : 'No'}
-              </TableCell>
-              <TableCell align="right">{data.logStation}</TableCell>
-              <TableCell align="right">{data.logTransmitter}</TableCell>
-            </TableRow>
+            {data.map((x) => (
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align="right">{x.callsign}</TableCell>
+                <TableCell align="right">{x.claimedScore}</TableCell>
+                <TableCell align="right">{x.power}W</TableCell>
+                <TableCell align="right">{x.logBand}</TableCell>
+                <TableCell align="right">{x.logMode}</TableCell>
+                <TableCell align="right">{x.club}</TableCell>
+                <TableCell align="right">{x.location}</TableCell>
+                <TableCell align="right">
+                  {x.multipleOperators ? 'Yes' : 'No'}
+                </TableCell>
+                <TableCell align="right">{x.logStation}</TableCell>
+                <TableCell align="right">{x.logTransmitter}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Box>

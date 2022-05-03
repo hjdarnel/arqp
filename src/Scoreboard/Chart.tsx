@@ -1,16 +1,11 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
-  Label,
   ResponsiveContainer,
   CartesianGrid,
   Bar,
   BarChart,
-  Legend,
   Tooltip
 } from 'recharts';
 import Title from './Title';

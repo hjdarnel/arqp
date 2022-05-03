@@ -23,10 +23,13 @@ const handler: Handler = async (event, context) => {
 
     console.log(contestId, callsign);
 
-    const result = await prisma.submission.findFirst({
+    const result = await prisma.submission.findMany({
       where: {
         contestId: event.queryStringParameters['contestId'],
-        callsign: event.queryStringParameters['callsign']
+        callsign: {
+          contains: event.queryStringParameters['callsign'],
+          mode: 'insensitive'
+        }
       }
     });
 

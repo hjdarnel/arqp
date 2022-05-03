@@ -15,15 +15,15 @@ import {
   Typography,
   Button
 } from '@mui/material';
-import { Contest } from '@prisma/client';
-import { getResult } from '../util/get-result';
+import { Contest, Submission } from '@prisma/client';
+import { getResult } from '../util/get-result-by-call';
 import Results from './Results';
 
 export default function Search() {
   const [allContests, setAllContests] = useState([] as Contest[]);
   const [selectedContest, setSelectedContest] = useState('');
   const [selectedCall, setSelectedCall] = useState('');
-  const [results, setResults] = useState();
+  const [results, setResults] = useState<Submission[]>();
 
   useEffect(() => {
     getAllContests()
