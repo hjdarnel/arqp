@@ -4,11 +4,24 @@ const prisma = new PrismaClient();
 
 const handler: Handler = async (event, context) => {
   try {
-    const response = await prisma.$runCommandRaw({ ping: 1 });
+    const timeStart = new Date();
+    const timeEnd = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
+      new Date().getDate()
+    );
+
+    const created = await prisma.contest.create({
+      data: {
+        title: `Test Contest ${Date.now()}`,
+        timeStart,
+        timeEnd
+      }
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ healthy: !!response.ok })
+      body: JSON.stringify({ created })
     };
   } catch (err) {
     console.error(err);
