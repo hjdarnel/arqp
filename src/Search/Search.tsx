@@ -24,6 +24,7 @@ export default function Search() {
   const [selectedContest, setSelectedContest] = useState<string>('');
   const [selectedCall, setSelectedCall] = useState<string>('');
   const [results, setResults] = useState<Submission[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getAllContests()
@@ -36,14 +37,28 @@ export default function Search() {
           'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
           { duration: 6000 }
         );
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const fetchResults = (e: any) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    if (!selectedCall || selectedContest === '') return;
-    getResult(selectedContest, selectedCall).then((x) => setResults(x));
+    if (!selectedCall || selectedContest === '') return setIsLoading(false);
+    getResult(selectedContest, selectedCall)
+      .then((x) => {
+        setResults(x);
+      })
+      .catch((err) => {
+        console.error(err);
+
+        toast.error(
+          'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
+          { duration: 6000 }
+        );
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const contestChangeHandler = (event: any) => {
@@ -136,6 +151,7 @@ export default function Search() {
                     type="submit"
                     variant="contained"
                     color="success"
+                    disabled={isLoading}
                   >
                     Submit
                   </Button>

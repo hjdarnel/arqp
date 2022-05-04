@@ -35,6 +35,7 @@ export default function Submit() {
   const [selectedFile, setSelectedFile] = useState<any>();
   const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
   const [currentContest, setCurrentContest] = useState<Contest>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getContest()
@@ -45,7 +46,8 @@ export default function Submit() {
           { duration: 6000 }
         );
         return navigate('/');
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const fileChangeHandler = (event: any) => {
@@ -62,6 +64,8 @@ export default function Submit() {
   };
 
   const handleSubmit = (e: any) => {
+    setIsLoading(true);
+
     e.preventDefault();
     if (!selectedFile || !currentContest) return;
     const formData = new FormData();

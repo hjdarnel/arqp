@@ -62,7 +62,7 @@ export default function Results({
         <DataGrid
           rows={submissions}
           columns={columns}
-          pageSize={24}
+          pageSize={25}
           disableSelectionOnClick
         />
       </div>

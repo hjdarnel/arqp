@@ -16,12 +16,12 @@ import {
 } from '@mui/material';
 import { Contest } from '@prisma/client';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 
 export default function Export() {
   const navigate = useNavigate();
   const [allContests, setAllContests] = useState<Contest[]>();
   const [selectedContest, setSelectedContest] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const mapContests = () => {
     if (allContests)
@@ -56,7 +56,8 @@ export default function Export() {
           'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
           { duration: 6000 }
         );
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const contestChangeHandler = (event: any) => {
@@ -124,6 +125,7 @@ export default function Export() {
                     onClick={fetchResults}
                     variant="contained"
                     color="success"
+                    disabled={isLoading}
                   >
                     Export
                   </Button>
