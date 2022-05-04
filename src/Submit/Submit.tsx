@@ -56,7 +56,7 @@ export default function Submit() {
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
-    gaEventTracker('select', 'selected_file');
+    gaEventTracker('select file', 'selected_file');
   };
 
   const handleInputChange = (e: any) => {
@@ -76,7 +76,7 @@ export default function Submit() {
 
   const handleSubmit = (e: any) => {
     setIsLoading(true);
-    gaEventTracker('submit', 'submit_log');
+    gaEventTracker('submit log', 'submit_log');
 
     e.preventDefault();
     if (!selectedFile || !currentContest) return;
@@ -246,7 +246,12 @@ export default function Submit() {
                 />
               </Grid>
               <Grid item xs={1}>
-                <Button type="submit" variant="contained" color="primary">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isLoading}
+                >
                   Submit
                 </Button>
               </Grid>

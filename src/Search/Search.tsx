@@ -47,7 +47,7 @@ export default function Search() {
   const fetchResults = (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-    gaEventTracker('search', 'search_results');
+    gaEventTracker('search results', 'search_results');
 
     if (!selectedCall || selectedContest === '') return setIsLoading(false);
     getResult(selectedContest, selectedCall)

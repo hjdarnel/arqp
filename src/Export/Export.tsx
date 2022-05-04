@@ -36,7 +36,7 @@ export default function Export() {
 
   const fetchResults = (e: any) => {
     e.preventDefault();
-    gaEventTracker('export', 'export_results');
+    gaEventTracker('export all results');
     location.assign(
       '/api/export-contest?' +
         new URLSearchParams({

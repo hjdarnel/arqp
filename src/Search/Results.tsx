@@ -10,21 +10,6 @@ import {
   Typography
 } from '@mui/material';
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const createRows = (data: any) => {
-  if (!data) return [];
-  return [];
-};
-
 export default function Results({ data }: { data: Submission[] }) {
   return (
     <React.Fragment>
