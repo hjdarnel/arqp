@@ -26,7 +26,7 @@ const handler: Handler = async (event, context) => {
           message:
             process.env.NODE_ENV === 'development'
               ? err.message
-              : `Error getting results for contest ${event.queryStringParameters['contestId']}.`
+              : `Unable to retrieve results for contest ${event.queryStringParameters['contestId']}.`
         }
       })
     };

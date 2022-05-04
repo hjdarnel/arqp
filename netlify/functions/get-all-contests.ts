@@ -20,7 +20,7 @@ const handler: Handler = async (event, context) => {
           message:
             process.env.NODE_ENV === 'development'
               ? err.message
-              : 'Error getting contests.'
+              : 'Unable to retrieve all contests.'
         }
       })
     };

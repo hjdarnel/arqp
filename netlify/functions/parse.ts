@@ -51,6 +51,12 @@ const parseMultipartForm = (event): Promise<Submission> => {
 
 const handler: Handler = async (event, context) => {
   try {
+    const currentContest = await prisma.contest.findFirst({
+      where: { timeStart: { lt: new Date() }, timeEnd: { gte: new Date() } }
+    });
+
+    if (!currentContest) throw new Error('No contest currently running!');
+
     if (event.httpMethod !== 'POST') return { statusCode: 404 };
     if (!event.body) throw new Error('Missing request body');
 
@@ -81,7 +87,7 @@ const handler: Handler = async (event, context) => {
 
     const created = await prisma.submission.create({
       data: {
-        contestId: body.contestId,
+        contestId: currentContest.id,
         email: body.email,
         callsign: body.callsign,
         power: body.power,
@@ -111,19 +117,28 @@ const handler: Handler = async (event, context) => {
     let message = err.message;
     let statusCode = 500;
 
-    if (process.env.NODE_ENV !== 'development') {
-      if (err.message.includes('Unique constraint failed on the constraint')) {
-        message =
-          'Invalid submission, only one submission allowed per callsign per contest.';
-        statusCode = 400;
-      } else {
-        message = 'Error submitting results.';
-      }
+    if (process.env.NODE_ENV === 'development') {
+      return {
+        statusCode,
+        body: JSON.stringify({ error: { message } })
+      };
+    }
+
+    if (err.message.includes('Unique constraint failed on the constraint')) {
+      return {
+        statusCode,
+        body: JSON.stringify({
+          error: {
+            message:
+              'Invalid submission, only one submission allowed per callsign per contest.'
+          }
+        })
+      };
     }
 
     return {
       statusCode,
-      body: JSON.stringify({ error: { message } })
+      body: JSON.stringify({ error: { message: 'Error submitting results.' } })
     };
   }
 };

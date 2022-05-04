@@ -8,6 +8,25 @@ const handler: Handler = async (event, context) => {
       where: { timeStart: { lt: new Date() }, timeEnd: { gte: new Date() } }
     });
 
+    if (!currentContest) {
+      const latest = await prisma.contest.findFirst({
+        orderBy: { timeEnd: 'desc' },
+        take: 1
+      });
+
+      if (!latest) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ message: `Current contest not found.` })
+        };
+      }
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify(latest)
+      };
+    }
+
     return {
       statusCode: 200,
       body: JSON.stringify(currentContest)
@@ -22,7 +41,7 @@ const handler: Handler = async (event, context) => {
           message:
             process.env.NODE_ENV === 'development'
               ? err.message
-              : `Error getting contest.`
+              : `Unable to retreive contest.`
         }
       })
     };
