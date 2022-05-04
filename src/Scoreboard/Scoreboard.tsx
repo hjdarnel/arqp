@@ -19,9 +19,10 @@ export default function Scoreboard() {
     getContest()
       .then((response) => getAllResultsByContest(response.id))
       .then((results) => setResults(results))
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         toast.error(
-          'Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help.',
+          `Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
           { duration: 6000 }
         );
       });

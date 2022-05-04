@@ -40,9 +40,10 @@ export default function Submit() {
   useEffect(() => {
     getContest()
       .then((response) => setCurrentContest(response))
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         toast.error(
-          'Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help.',
+          `Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
           { duration: 6000 }
         );
         return navigate('/');
@@ -56,11 +57,18 @@ export default function Submit() {
   };
 
   const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value
-    });
+    let { name, value } = e.target;
+    if (name === 'callsign') {
+      setFormValues({
+        ...formValues,
+        [name]: value.toUpperCase()
+      });
+    } else {
+      setFormValues({
+        ...formValues,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = (e: any) => {

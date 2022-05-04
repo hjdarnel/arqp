@@ -14,7 +14,14 @@ const handler: Handler = async (event, context) => {
     console.error(err);
     return {
       statusCode: 50,
-      body: JSON.stringify({ err })
+      body: JSON.stringify({
+        error: {
+          message:
+            process.env.NODE_ENV === 'development'
+              ? err.message
+              : `Error getting health check.`
+        }
+      })
     };
   }
 };

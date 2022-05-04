@@ -32,9 +32,10 @@ export default function Search() {
         setAllContests(response);
         setSelectedContest(response[0].id);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         toast.error(
-          'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
+          `Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
           { duration: 6000 }
         );
       })
@@ -54,7 +55,7 @@ export default function Search() {
         console.error(err);
 
         toast.error(
-          'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
+          `Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
           { duration: 6000 }
         );
       })
@@ -78,8 +79,8 @@ export default function Search() {
 
   const handleUpdate = (e: any) => {
     e.preventDefault();
-    if (e && e.target && e.target.value) {
-      setSelectedCall(e.target.value);
+    if (e && e.target) {
+      setSelectedCall(e.target.value.toUpperCase());
     }
   };
 
@@ -128,6 +129,7 @@ export default function Search() {
                     label="Callsign"
                     helperText="Call Sign Used During Contest"
                     onChange={handleUpdate}
+                    value={selectedCall}
                     name="callsign"
                   />
 

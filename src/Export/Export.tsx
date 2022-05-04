@@ -51,9 +51,10 @@ export default function Export() {
         setAllContests(response);
         setSelectedContest(response[0].id);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         toast.error(
-          'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
+          `Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
           { duration: 6000 }
         );
       })

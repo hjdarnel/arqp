@@ -31,8 +31,19 @@ const handler: Handler = async (event, context) => {
       }
     });
 
+    if (!result) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({
+          error: {
+            message: 'Submission not found.'
+          }
+        })
+      };
+    }
+
     return {
-      statusCode: result === null ? 404 : 200,
+      statusCode: 200,
       body: JSON.stringify(result)
     };
   } catch (err: any) {
@@ -40,10 +51,14 @@ const handler: Handler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body:
-        process.env.NODE_ENV === 'development'
-          ? err.message
-          : 'Error getting result.'
+      body: JSON.stringify({
+        error: {
+          message:
+            process.env.NODE_ENV === 'development'
+              ? err.message
+              : `Error getting result.`
+        }
+      })
     };
   }
 };

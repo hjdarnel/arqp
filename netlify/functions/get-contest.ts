@@ -17,10 +17,14 @@ const handler: Handler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body:
-        process.env.NODE_ENV === 'development'
-          ? err.message
-          : 'Error getting contest.'
+      body: JSON.stringify({
+        error: {
+          message:
+            process.env.NODE_ENV === 'development'
+              ? err.message
+              : `Error getting contest.`
+        }
+      })
     };
   }
 };

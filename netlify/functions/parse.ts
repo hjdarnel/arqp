@@ -105,13 +105,22 @@ const handler: Handler = async (event, context) => {
     };
   } catch (err: any) {
     console.error(err.message);
+    let message = err.message;
+    let statusCode = 500;
+
+    if (process.env.NODE_ENV !== 'development') {
+      if (err.message.includes('Unique constraint failed on the constraint')) {
+        message =
+          'Invalid submission, only one submission allowed per callsign per contest.';
+        statusCode = 400;
+      } else {
+        message = 'Error submitting results.';
+      }
+    }
 
     return {
-      statusCode: 500,
-      body:
-        process.env.NODE_ENV === 'development'
-          ? err.message
-          : 'Error processing file.'
+      statusCode,
+      body: JSON.stringify({ error: { message } })
     };
   }
 };

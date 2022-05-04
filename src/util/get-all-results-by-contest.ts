@@ -8,5 +8,13 @@ export const getAllResultsByContest = async (
       new URLSearchParams({
         contestId
       })
-  ).then(async (response) => await response.json());
+  )
+    .then(async (response) => await response.json())
+    .then((response) => {
+      if (response.status < 300) {
+        throw new Error(response.error.message);
+      }
+
+      return response;
+    });
 };

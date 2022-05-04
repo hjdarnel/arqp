@@ -16,8 +16,13 @@ const handler: Handler = async (event, context) => {
     if (!contest)
       return {
         statusCode: 404,
-        body: `No contest found for id ${event.queryStringParameters['contestId']}`
+        body: JSON.stringify({
+          error: {
+            message: `No contest found for id ${event.queryStringParameters['contestId']}`
+          }
+        })
       };
+
     const submissions = await prisma.submission.findMany({
       where: { contestId: event.queryStringParameters['contestId'] }
     });
@@ -39,10 +44,14 @@ const handler: Handler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body:
-        process.env.NODE_ENV === 'development'
-          ? err.message
-          : 'Error getting contest.'
+      body: JSON.stringify({
+        error: {
+          message:
+            process.env.NODE_ENV === 'development'
+              ? err.message
+              : 'Error getting contest.'
+        }
+      })
     };
   }
 };
