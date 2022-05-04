@@ -15,13 +15,13 @@ import {
   Button
 } from '@mui/material';
 import { Contest } from '@prisma/client';
-import { useNavigate } from 'react-router-dom';
+import useAnalyticsEventTracker from '../util/analytics';
 
 export default function Export() {
-  const navigate = useNavigate();
   const [allContests, setAllContests] = useState<Contest[]>();
   const [selectedContest, setSelectedContest] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const gaEventTracker = useAnalyticsEventTracker();
 
   const mapContests = () => {
     if (allContests)
@@ -36,7 +36,7 @@ export default function Export() {
 
   const fetchResults = (e: any) => {
     e.preventDefault();
-
+    gaEventTracker('export', 'export_results');
     location.assign(
       '/api/export-contest?' +
         new URLSearchParams({

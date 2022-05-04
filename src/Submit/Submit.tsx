@@ -20,6 +20,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { getContest } from '../util/get-contest';
 import { Contest } from '@prisma/client';
+import useAnalyticsEventTracker from '../util/analytics';
 
 const defaultValues = {
   callsign: '',
@@ -36,6 +37,7 @@ export default function Submit() {
   const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
   const [currentContest, setCurrentContest] = useState<Contest>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const gaEventTracker = useAnalyticsEventTracker();
 
   useEffect(() => {
     getContest()
@@ -54,6 +56,7 @@ export default function Submit() {
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
+    gaEventTracker('select', 'selected_file');
   };
 
   const handleInputChange = (e: any) => {
@@ -73,6 +76,7 @@ export default function Submit() {
 
   const handleSubmit = (e: any) => {
     setIsLoading(true);
+    gaEventTracker('submit', 'submit_log');
 
     e.preventDefault();
     if (!selectedFile || !currentContest) return;

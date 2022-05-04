@@ -18,6 +18,7 @@ import {
 import { Contest, Submission } from '@prisma/client';
 import { getResult } from '../util/get-result-by-call';
 import Results from './Results';
+import useAnalyticsEventTracker from '../util/analytics';
 
 export default function Search() {
   const [allContests, setAllContests] = useState<Contest[]>();
@@ -25,6 +26,7 @@ export default function Search() {
   const [selectedCall, setSelectedCall] = useState<string>('');
   const [results, setResults] = useState<Submission[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const gaEventTracker = useAnalyticsEventTracker();
 
   useEffect(() => {
     getAllContests()
@@ -45,6 +47,7 @@ export default function Search() {
   const fetchResults = (e: any) => {
     e.preventDefault();
     setIsLoading(true);
+    gaEventTracker('search', 'search_results');
 
     if (!selectedCall || selectedContest === '') return setIsLoading(false);
     getResult(selectedContest, selectedCall)
