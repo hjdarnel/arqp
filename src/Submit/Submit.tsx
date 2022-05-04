@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { getContest } from '../util/get-contest';
 import { Contest } from '@prisma/client';
 import useAnalyticsEventTracker from '../util/analytics';
+import { postSubmission } from '../util/post-submission';
 
 const defaultValues = {
   callsign: '',
@@ -45,7 +46,7 @@ export default function Submit() {
       .catch((err) => {
         console.error(err);
         toast.error(
-          `Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
+          `Error retrieving the active contest! Please contact arkansasqsoparty@gmail.com for help. \n\n${err}`,
           { duration: 6000 }
         );
         return navigate('/');
@@ -93,24 +94,20 @@ export default function Submit() {
       selectedFile.name
     );
 
-    fetch('/api/parse', {
-      method: 'POST',
-      body: formData
-    })
-      .then(async (response) => {
-        if (response.status < 400) {
-          toast.success('Successfully submitted!', { duration: 6000 });
-          navigate('/');
-        } else {
-          throw new Error(await response.text());
-        }
+    postSubmission(formData)
+      .then(() => {
+        toast.success('Successfully submitted!', { duration: 6000 });
+        navigate('/');
       })
       .catch((error) => {
         toast.error(
-          `Error submitting log. Please contact arkansasqsoparty@gmail.com for help! ${error}`,
+          `Error submitting log. Please contact arkansasqsoparty@gmail.com for help! \n\n${error.message}`,
           { duration: 10000 }
         );
         console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 

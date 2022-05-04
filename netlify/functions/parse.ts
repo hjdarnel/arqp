@@ -1,9 +1,7 @@
 import { cabrilloToObject } from 'cabrillo';
-import { writeToBuffer } from '@fast-csv/format';
 import { Handler } from '@netlify/functions';
 import Busboy from 'busboy';
 import { PrismaClient } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 const prisma = new PrismaClient();
 
 interface Submission {
@@ -60,8 +58,13 @@ const handler: Handler = async (event, context) => {
     if (!body?.file) throw new Error('Missing required file');
     console.log('Received request', { ...body, file: 'omitted' });
 
-    const cabrillo = Buffer.from(body.file.content, 'base64').toString();
-    let parsed = cabrilloToObject(cabrillo, { contest: 'NAQP' });
+    let parsed;
+    try {
+      const cabrillo = Buffer.from(body.file.content, 'base64').toString();
+      parsed = cabrilloToObject(cabrillo, { contest: 'NAQP' });
+    } catch (err) {
+      throw new Error('Cannot parse file as Cabrillo log. Is it a valid log?');
+    }
 
     Object.entries(parsed).map(([key, value]) => {
       if (key === 'QSO') return (parsed[key] = value);

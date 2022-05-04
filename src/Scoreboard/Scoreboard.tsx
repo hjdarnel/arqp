@@ -22,7 +22,7 @@ export default function Scoreboard() {
       .catch((err) => {
         console.error(err);
         toast.error(
-          `Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help. ${err}`,
+          `Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help. \n\n${err}`,
           { duration: 6000 }
         );
       });
