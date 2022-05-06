@@ -166,14 +166,12 @@ export default function Search() {
           </Grid>
 
           {/* Results */}
-          {results ? (
+          {results && (
             <Grid item xs={12}>
-              <Paper sx={{ p: 2 }}>
-                <Results data={results} />
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <Results submissions={results} />
               </Paper>
             </Grid>
-          ) : (
-            <React.Fragment></React.Fragment>
           )}
         </Grid>
       </Container>

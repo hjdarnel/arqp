@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Title from './Title';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Submission } from '@prisma/client';
 
 const columns: GridColDef[] = [

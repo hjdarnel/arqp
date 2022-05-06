@@ -1,55 +1,60 @@
 import * as React from 'react';
 import { Submission } from '@prisma/client';
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography
-} from '@mui/material';
+import { GridColDef, DataGrid } from '@mui/x-data-grid';
+import { Typography } from '@mui/material';
 
-export default function Results({ data }: { data: Submission[] }) {
+const columns: GridColDef[] = [
+  { field: 'callsign', headerName: 'Callsign', width: 90 },
+  {
+    field: 'claimedScore',
+    headerName: 'Score',
+    width: 100
+  },
+  {
+    field: 'category',
+    headerName: 'Category',
+    width: 250
+  },
+  {
+    field: 'logBand',
+    headerName: 'Band',
+    width: 110
+  },
+  {
+    field: 'logMode',
+    headerName: 'Mode',
+    width: 110
+  },
+  {
+    field: 'logStation',
+    headerName: 'Station',
+    width: 110
+  },
+  {
+    field: 'contestLocation',
+    headerName: 'Location',
+    width: 200
+  }
+];
+
+export default function Results({
+  submissions
+}: {
+  submissions: Submission[];
+}) {
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" sx={{ mb: 2 }}>
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Results
       </Typography>
-      <Box>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Callsign</TableCell>
-              <TableCell align="right">Claimed Score</TableCell>
-              <TableCell align="right">Band</TableCell>
-              <TableCell align="right">Mode</TableCell>
-              <TableCell align="right">Club</TableCell>
-              <TableCell align="right">Multiple Operators</TableCell>
-              <TableCell align="right">Station</TableCell>
-              <TableCell align="right">Transmitter</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((x) => (
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="right">{x.callsign}</TableCell>
-                <TableCell align="right">{x.claimedScore}</TableCell>
-                <TableCell align="right">{x.logBand}</TableCell>
-                <TableCell align="right">{x.logMode}</TableCell>
-                <TableCell align="right">{x.club}</TableCell>
-                <TableCell align="right">
-                  {x.multipleOperators ? 'Yes' : 'No'}
-                </TableCell>
-                <TableCell align="right">{x.logStation}</TableCell>
-                <TableCell align="right">{x.logTransmitter}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Box>
+      <div style={{ height: '400px', width: '100%' }}>
+        <DataGrid
+          rows={submissions}
+          columns={columns}
+          pageSize={25}
+          disableSelectionOnClick
+        />
+      </div>
     </React.Fragment>
   );
 }
