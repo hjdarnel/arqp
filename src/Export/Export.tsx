@@ -12,7 +12,8 @@ import {
   Select,
   MenuItem,
   Typography,
-  Button
+  Button,
+  TextField
 } from '@mui/material';
 import { Contest } from '@prisma/client';
 import useAnalyticsEventTracker from '../util/analytics';
@@ -21,6 +22,7 @@ export default function Export() {
   const [allContests, setAllContests] = useState<Contest[]>();
   const [selectedContest, setSelectedContest] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>();
   const gaEventTracker = useAnalyticsEventTracker();
 
   const mapContests = () => {
@@ -37,10 +39,12 @@ export default function Export() {
   const fetchResults = (e: any) => {
     e.preventDefault();
     gaEventTracker('export all results');
+    if (!password) return;
     location.assign(
       '/api/export-contest?' +
         new URLSearchParams({
-          contestId: selectedContest
+          contestId: selectedContest,
+          password
         })
     );
   };
@@ -117,16 +121,28 @@ export default function Export() {
                       value={selectedContest}
                       label="Select Contest"
                       onChange={contestChangeHandler}
+                      MenuProps={{ transitionDuration: 0 }}
                     >
                       {mapContests()}
                     </Select>
                   </FormControl>
+                  <FormControl>
+                    <TextField
+                      required
+                      sx={{ width: '200px' }}
+                      label="Password"
+                      helperText=""
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormControl>
                   <Button
                     sx={{ height: '56px' }}
-                    onClick={fetchResults}
                     variant="contained"
                     color="success"
                     disabled={isLoading}
+                    type="submit"
                   >
                     Export
                   </Button>

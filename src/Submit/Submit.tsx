@@ -269,29 +269,6 @@ export default function Submit() {
               <Grid item md={4}></Grid>
               <Grid item xs={8} md={4}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
-                  {/* <InputLabel id="location-select-label">
-                    Operating Location
-                  </InputLabel>
-                  <Select
-                    id="location-select"
-                    labelId="location-select-label"
-                    name="location"
-                    value={formValues.location}
-                    label="Operating Location"
-                    onChange={handleInputChange}
-                    MenuProps={{ transitionDuration: 0 }}
-                  >
-                    {Object.keys(Location).map((x) => {
-                      return (
-                        <MenuItem key={x} value={x}>
-                          {x}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  <FormHelperText>
-                    Location of the operating station
-                  </FormHelperText> */}
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
