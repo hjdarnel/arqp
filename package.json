@@ -5,7 +5,7 @@
   "scripts": {
     "prestart:dev": "prisma db push",
     "dev": "npm run prestart:dev && vite",
-    "build": "tsc && prisma db push && vite build",
+    "build": "prisma db push && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
