@@ -26,6 +26,7 @@ import { postSubmission } from '../util/post-submission';
 const defaultValues = {
   callsign: '',
   email: '',
+  claimedScore: 0,
   power: '',
   assistance: 'false',
   multipleOperators: 'false'
@@ -35,7 +36,6 @@ export default function Submit() {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(defaultValues);
   const [selectedFile, setSelectedFile] = useState<any>();
-  const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
   const [currentContest, setCurrentContest] = useState<Contest>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const gaEventTracker = useAnalyticsEventTracker();
@@ -56,36 +56,53 @@ export default function Submit() {
 
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
     gaEventTracker('select file', 'selected_file');
   };
 
   const handleInputChange = (e: any) => {
     let { name, value } = e.target;
-    if (name === 'callsign') {
-      setFormValues({
-        ...formValues,
-        [name]: value.toUpperCase()
-      });
-    } else {
-      setFormValues({
-        ...formValues,
-        [name]: value
-      });
+    switch (name) {
+      case 'callsign':
+        setFormValues({
+          ...formValues,
+          [name]: value.toUpperCase()
+        });
+
+        break;
+      case 'claimedScore':
+        const isNumeric = /^[0-9]*$/.test(value);
+        if (isNumeric && value !== '') {
+          setFormValues({
+            ...formValues,
+            [name]: value.replace(/^0+/, '')
+          });
+        } else {
+          setFormValues({
+            ...formValues,
+            [name]: 0
+          });
+        }
+        break;
+      default:
+        setFormValues({
+          ...formValues,
+          [name]: value
+        });
+        break;
     }
   };
 
   const handleSubmit = (e: any) => {
+    e.preventDefault();
     setIsLoading(true);
     gaEventTracker('submit log', 'submit_log');
 
-    e.preventDefault();
     if (!selectedFile || !currentContest) return;
     const formData = new FormData();
     formData.append('contestId', currentContest.id);
 
     Object.entries(formValues).map(([k, v]) => {
-      formData.append(k, v);
+      formData.append(k, v.toString());
     });
 
     formData.append(
@@ -142,7 +159,7 @@ export default function Submit() {
             </Typography>
 
             <Grid container rowSpacing={3} columnSpacing={1}>
-              <Grid item xs={3}>
+              <Grid item xs={4} md={3}>
                 <TextField
                   label="Callsign"
                   helperText="Call Sign Used During Contest"
@@ -153,9 +170,8 @@ export default function Submit() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4} md={3}>
                 <TextField
-                  fullWidth
                   label="Email"
                   helperText="Submitter's E-mail Address"
                   variant="filled"
@@ -166,7 +182,23 @@ export default function Submit() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={3}>
+                <TextField
+                  InputProps={{
+                    inputMode: 'numeric',
+                    inputProps: { min: '0' }
+                  }}
+                  value={formValues.claimedScore}
+                  label="Score"
+                  helperText="Score"
+                  variant="filled"
+                  type="number"
+                  required
+                  name="claimedScore"
+                  onChange={handleInputChange}
+                />
+              </Grid>
+              <Grid item xs={8}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="power-select-label">Power</InputLabel>
                   <Select
@@ -242,17 +274,16 @@ export default function Submit() {
                   fileChangeHandler={fileChangeHandler}
                 />
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={4}>
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
                   disabled={isLoading}
+                  sx={{ mr: 2 }}
                 >
                   Submit
                 </Button>
-              </Grid>
-              <Grid item xs={1}>
                 <Button
                   component={Link}
                   to="/"

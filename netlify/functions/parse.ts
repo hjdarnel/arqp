@@ -17,6 +17,7 @@ interface Submission {
   assistance?: string;
   multipleOperators?: string;
   contestId?: string;
+  claimedScore?: string;
 }
 
 const parseMultipartForm = (event): Promise<Submission> => {
@@ -95,7 +96,7 @@ const handler: Handler = async (event, context) => {
         assistance: body.assistance === 'true',
         name: parsed.NAME,
         club: parsed.CLUB,
-        claimedScore: Number.parseInt(parsed['CLAIMED-SCORE']),
+        claimedScore: Number.parseInt(body.claimedScore),
         location: parsed.LOCATION,
         logEmail: parsed.EMAIL,
         logOperator: parsed['CATEGORY-OPERATOR'].split('-')[0],
