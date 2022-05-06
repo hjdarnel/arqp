@@ -22,11 +22,9 @@ export default function Results({ data }: { data: Submission[] }) {
             <TableRow>
               <TableCell align="right">Callsign</TableCell>
               <TableCell align="right">Claimed Score</TableCell>
-              <TableCell align="right">Power</TableCell>
               <TableCell align="right">Band</TableCell>
               <TableCell align="right">Mode</TableCell>
               <TableCell align="right">Club</TableCell>
-              <TableCell align="right">Location</TableCell>
               <TableCell align="right">Multiple Operators</TableCell>
               <TableCell align="right">Station</TableCell>
               <TableCell align="right">Transmitter</TableCell>
@@ -39,11 +37,9 @@ export default function Results({ data }: { data: Submission[] }) {
               >
                 <TableCell align="right">{x.callsign}</TableCell>
                 <TableCell align="right">{x.claimedScore}</TableCell>
-                <TableCell align="right">{x.power}W</TableCell>
                 <TableCell align="right">{x.logBand}</TableCell>
                 <TableCell align="right">{x.logMode}</TableCell>
                 <TableCell align="right">{x.club}</TableCell>
-                <TableCell align="right">{x.location}</TableCell>
                 <TableCell align="right">
                   {x.multipleOperators ? 'Yes' : 'No'}
                 </TableCell>

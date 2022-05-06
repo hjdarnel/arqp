@@ -8,12 +8,12 @@ const columns: GridColDef[] = [
   {
     field: 'claimedScore',
     headerName: 'Score',
-    width: 150
+    width: 100
   },
   {
-    field: 'power',
-    headerName: 'Power',
-    width: 150
+    field: 'category',
+    headerName: 'Category',
+    width: 250
   },
   {
     field: 'logBand',
@@ -31,24 +31,11 @@ const columns: GridColDef[] = [
     width: 110
   },
   {
-    field: 'logTransmitter',
-    headerName: 'Transmitter',
-    width: 110
-  },
-  {
-    field: 'logOperator',
-    headerName: 'Operators',
-    width: 110,
-    valueGetter: (params: GridValueGetterParams) =>
-      params.row.logOperator === 'CHECKLOG'
-        ? 'CHECKLOG'
-        : `${params.row.logOperator}-OP`
+    field: 'contestLocation',
+    headerName: 'Location',
+    width: 200
   }
 ];
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
 
 export default function Results({
   submissions
