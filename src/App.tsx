@@ -1,5 +1,4 @@
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import red from '@mui/material/colors/red';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
@@ -10,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import { mainListItems, secondaryListItems } from './listItems';
 import Scoreboard from './Scoreboard/Scoreboard';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Submit from './Submit/Submit';
 import Search from './Search/Search';
 import Export from './Export/Export';
@@ -58,6 +57,8 @@ const mdTheme = createTheme({
 });
 
 const AppContent = () => {
+  const navigate = useNavigate();
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -65,11 +66,11 @@ const AppContent = () => {
         <MuiAppBar position="absolute">
           <Toolbar>
             <Typography
-              component="h1"
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, textDecoration: 'none', cursor: 'pointer' }}
+              onClick={() => navigate('/')}
             >
               Arkansas QSO Party
             </Typography>
