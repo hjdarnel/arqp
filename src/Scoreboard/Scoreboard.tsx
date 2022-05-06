@@ -45,7 +45,7 @@ export default function Scoreboard() {
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           {/* Chart */}
-          <Grid item xs={12} md={8} lg={9}>
+          <Grid item xs={12} md={6} lg={8}>
             <Paper
               sx={{
                 p: 2,
@@ -57,8 +57,8 @@ export default function Scoreboard() {
               <Chart submissions={results} />
             </Paper>
           </Grid>
-          {/* Recent Deposits */}
-          <Grid item xs={12} md={4} lg={3}>
+          {/* Overview */}
+          <Grid item xs={12} md={4} lg={4}>
             <Paper
               sx={{
                 p: 2,
@@ -67,10 +67,10 @@ export default function Scoreboard() {
                 height: 340
               }}
             >
-              <Overview submissions={results || []} />
+              <Overview allSubmissions={results || []} />
             </Paper>
           </Grid>
-          {/* Recent Orders */}
+          {/* Results */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
               <Results submissions={results} />
