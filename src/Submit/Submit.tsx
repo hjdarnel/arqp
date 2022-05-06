@@ -163,7 +163,7 @@ export default function Submit() {
             </Typography>
 
             <Grid container rowSpacing={3} columnSpacing={1}>
-              <Grid item xs={4} md={3}>
+              <Grid item sm={4} md={3}>
                 <TextField
                   label="Callsign"
                   helperText="Call Sign Used During Contest"
@@ -174,7 +174,7 @@ export default function Submit() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={4} md={3}>
+              <Grid item sm={4} md={3}>
                 <TextField
                   label="Email"
                   helperText="Submitter's E-mail Address"
@@ -186,7 +186,7 @@ export default function Submit() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={8} md={3}>
+              <Grid item sm={8} md={3}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <TextField
                     InputProps={{
@@ -213,7 +213,7 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={8} md={4}>
+              <Grid item sm={8} md={4}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="category-select-label">Category</InputLabel>
                   <Select
@@ -242,7 +242,7 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item sm={6} md={4}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="power-select-label">
                     Spotting Assistance
@@ -267,7 +267,7 @@ export default function Submit() {
                 </FormControl>
               </Grid>
               <Grid item md={4}></Grid>
-              <Grid item xs={8} md={4}>
+              <Grid item sm={8} md={4}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <Autocomplete
                     disablePortal
@@ -289,7 +289,7 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item sm={6}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="power-select-label">Operators</InputLabel>
                   <Select
@@ -309,7 +309,7 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item sm={12}>
                 <label htmlFor="file">
                   <Typography color="text.secondary">
                     Upload Cabrillo log (*.log file extension)
@@ -322,7 +322,7 @@ export default function Submit() {
                   fileChangeHandler={fileChangeHandler}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item sm={4}>
                 <Button
                   type="submit"
                   variant="contained"

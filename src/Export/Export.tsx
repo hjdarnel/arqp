@@ -85,7 +85,7 @@ export default function Export() {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             <Paper
               sx={{
                 p: 2,
@@ -107,11 +107,11 @@ export default function Export() {
                 <Box
                   sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: { xs: 'column', md: 'row' },
                     gap: 2
                   }}
                 >
-                  <FormControl sx={{ width: '300px' }}>
+                  <FormControl>
                     <InputLabel id="contest-select-label">
                       Select Contest
                     </InputLabel>
@@ -129,7 +129,6 @@ export default function Export() {
                   <FormControl>
                     <TextField
                       required
-                      sx={{ width: '200px' }}
                       label="Password"
                       helperText=""
                       name="password"

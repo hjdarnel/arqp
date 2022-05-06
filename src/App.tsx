@@ -16,11 +16,20 @@ import Export from './Export/Export';
 
 const Copyright = (props: any) => {
   return (
-    <Box sx={{ position: 'absolute', width: '100%', bottom: 0, p: 2 }}>
+    <Box
+      sx={{
+        position: 'absolute',
+        width: '100%',
+        bottom: 0,
+        py: 2,
+        px: { xs: '0', sm: '2' }
+      }}
+    >
       <Typography
         variant="body2"
         color="text.secondary"
         align="center"
+        sx={{ fontSize: { xs: '10px', md: '14px' } }}
         {...props}
       >
         {'Copyright © '}
@@ -63,16 +72,34 @@ const AppContent = () => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <MuiAppBar position="absolute">
-          <Toolbar>
+        <MuiAppBar position="absolute" sx={{ height: '4rem' }}>
+          <Toolbar
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
+              alignItems: { xs: 'start', sm: 'center' }
+            }}
+          >
             <Typography
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1, textDecoration: 'none', cursor: 'pointer' }}
+              sx={{ textDecoration: 'none', cursor: 'pointer' }}
               onClick={() => navigate('/')}
             >
               Arkansas QSO Party
+            </Typography>
+            <Typography
+              color="inherit"
+              noWrap
+              sx={{
+                textDecoration: 'none',
+                cursor: 'pointer',
+                ml: { xs: '0', sm: '1rem' }
+              }}
+              onClick={() => navigate('/')}
+            >
+              sponsored by the Noise Blankers Radio Group
             </Typography>
           </Toolbar>
         </MuiAppBar>

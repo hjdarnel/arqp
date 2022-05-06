@@ -103,7 +103,7 @@ export default function Search() {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             <Paper
               sx={{
                 p: 2,
@@ -124,7 +124,7 @@ export default function Search() {
                 <Box
                   sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: { xs: 'column', md: 'row' },
                     gap: 2
                   }}
                 >
@@ -136,7 +136,7 @@ export default function Search() {
                     name="callsign"
                   />
 
-                  <FormControl sx={{ width: '300px' }}>
+                  <FormControl>
                     <InputLabel id="contest-select-label">
                       Select Contest
                     </InputLabel>
@@ -167,7 +167,7 @@ export default function Search() {
 
           {/* Results */}
           {results && (
-            <Grid item xs={12}>
+            <Grid item sm={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <Results submissions={results} />
               </Paper>
