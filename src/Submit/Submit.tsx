@@ -11,7 +11,8 @@ import {
   FormHelperText,
   FormControl,
   Button,
-  Typography
+  Typography,
+  Autocomplete
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -22,12 +23,15 @@ import { getContest } from '../util/get-contest';
 import { Contest } from '@prisma/client';
 import useAnalyticsEventTracker from '../util/analytics';
 import { postSubmission } from '../util/post-submission';
+import { Category } from '../util/categories';
+import { Location } from '../util/locations';
 
 const defaultValues = {
   callsign: '',
   email: '',
   claimedScore: 0,
-  power: '',
+  category: '',
+  location: '',
   assistance: 'false',
   multipleOperators: 'false'
 };
@@ -182,43 +186,63 @@ export default function Submit() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  InputProps={{
-                    inputMode: 'numeric',
-                    inputProps: { min: '0' }
-                  }}
-                  value={formValues.claimedScore}
-                  label="Score"
-                  helperText="Score"
-                  variant="filled"
-                  type="number"
-                  required
-                  name="claimedScore"
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={8} md={3}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
-                  <InputLabel id="power-select-label">Power</InputLabel>
-                  <Select
-                    id="power-select"
-                    labelId="power-select-label"
-                    name="power"
-                    value={formValues.power}
-                    label="Power"
+                  <TextField
+                    InputProps={{
+                      inputMode: 'numeric',
+                      inputProps: { min: '0' }
+                    }}
+                    value={formValues.claimedScore}
+                    label="Score"
+                    variant="filled"
+                    type="number"
+                    required
+                    name="claimedScore"
                     onChange={handleInputChange}
-                  >
-                    <MenuItem value={'<5'}>5W or less</MenuItem>
-                    <MenuItem value={'<100'}>100W or less</MenuItem>
-                    <MenuItem value={'>100'}>More than 100W</MenuItem>
-                  </Select>
+                  />
                   <FormHelperText>
-                    What's the highest output power you used during the contest?
+                    For calcuation instructions, check out the{' '}
+                    <a href="https://arkqp.com/arkansas-qso-party-rules/">
+                      Rules
+                    </a>
+                    .{' '}
+                    <strong>
+                      Bear in mind your logging software may underestimate!
+                    </strong>
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={8} md={4}>
+                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+                  <InputLabel id="category-select-label">Category</InputLabel>
+                  <Select
+                    id="category-select"
+                    labelId="category-select-label"
+                    name="category"
+                    value={formValues.category}
+                    label="Category"
+                    onChange={handleInputChange}
+                    MenuProps={{ transitionDuration: 0 }}
+                  >
+                    {Object.keys(Category).map((x) => {
+                      return (
+                        <MenuItem key={x} value={x}>
+                          {x}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText>
+                    For contest category definition, check out the{' '}
+                    <a href="https://arkqp.com/arkansas-qso-party-rules/">
+                      Rules
+                    </a>
+                    .
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6} md={4}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="power-select-label">
                     Spotting Assistance
@@ -230,6 +254,7 @@ export default function Submit() {
                     value={formValues.assistance}
                     label="Spotting Assistance"
                     onChange={handleInputChange}
+                    MenuProps={{ transitionDuration: 0 }}
                   >
                     <MenuItem value="false">No</MenuItem>
                     <MenuItem value="true">Yes</MenuItem>
@@ -241,7 +266,53 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item md={4}></Grid>
+              <Grid item xs={8} md={4}>
+                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+                  {/* <InputLabel id="location-select-label">
+                    Operating Location
+                  </InputLabel>
+                  <Select
+                    id="location-select"
+                    labelId="location-select-label"
+                    name="location"
+                    value={formValues.location}
+                    label="Operating Location"
+                    onChange={handleInputChange}
+                    MenuProps={{ transitionDuration: 0 }}
+                  >
+                    {Object.keys(Location).map((x) => {
+                      return (
+                        <MenuItem key={x} value={x}>
+                          {x}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText>
+                    Location of the operating station
+                  </FormHelperText> */}
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={Object.keys(Location)}
+                    renderInput={(params) => (
+                      <TextField
+                        required
+                        variant="filled"
+                        {...params}
+                        label="Location"
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    Location of the operating station. County for Arkansas,
+                    otherwise US state or Canadian province, DX for
+                    international
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
                 <FormControl variant="filled" sx={{ minWidth: 160 }} required>
                   <InputLabel id="power-select-label">Operators</InputLabel>
                   <Select

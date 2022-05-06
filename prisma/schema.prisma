@@ -25,14 +25,15 @@ model Submission {
   contestId         String       @db.ObjectId
   callsign          String
   email             String
-  power             String
+  category          String
+  contestLocation   String
   assistance        Boolean      @default(false)
   multipleOperators Boolean      @default(false)
   claimedScore      Int          @default(0)
   name              String?
   club              String?
-  location          String?
   logEmail          String?
+  logLocation       String?
   logOperator       Operator?
   logStation        Station?
   logTransmitter    Transmitter?

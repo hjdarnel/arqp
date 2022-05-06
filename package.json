@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "prestart:dev": "prisma generate",
-    "dev": "vite",
+    "prestart:dev": "prisma db push",
+    "dev": "npm run prestart:dev && vite",
     "build": "tsc && prisma db push && vite build",
     "preview": "vite preview"
   },
