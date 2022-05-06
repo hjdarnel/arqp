@@ -72,10 +72,12 @@ export default function Overview({
         Total Submissions
       </Typography>
       <Typography component="p" variant="h4">
-        {submissions.reduce((acc, current) => acc + current.claimedScore, 0)}
+        {submissions.reduce((acc, current) => {
+          return current.claimedScore > acc ? current.claimedScore : acc;
+        }, 0)}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        Total Score
+        High Score
       </Typography>
       <Typography component="p" variant="h4">
         {submissions.length
