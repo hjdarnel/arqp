@@ -1,0 +1,8 @@
+User-Agent: *
+Disallow: /search
+Disallow: /export
+
+User-Agent: AdsBot-Google
+Disallow: /search
+Disallow: /export
+
