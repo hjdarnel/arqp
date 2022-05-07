@@ -202,7 +202,7 @@ export default function Submit() {
                     onChange={handleInputChange}
                   />
                   <FormHelperText>
-                    For calcuation instructions, check out the{' '}
+                    For calculation instructions, check out the{' '}
                     <a href="https://arkqp.com/arkansas-qso-party-rules/">
                       Rules
                     </a>
