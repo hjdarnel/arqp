@@ -146,6 +146,8 @@ export default function Search() {
                       value={selectedContest}
                       label="Select Contest"
                       onChange={contestChangeHandler}
+                      MenuProps={{ transitionDuration: 0 }}
+                      sx={{ minWidth: '100px' }}
                     >
                       {mapContests()}
                     </Select>
