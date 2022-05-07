@@ -299,6 +299,7 @@ export default function Submit() {
                     value={formValues.multipleOperators}
                     label="Operators"
                     onChange={handleInputChange}
+                    MenuProps={{ transitionDuration: 0 }}
                   >
                     <MenuItem value="false">One</MenuItem>
                     <MenuItem value="true">One or more</MenuItem>
