@@ -155,7 +155,9 @@ enum Category {
   'Single Operator Low Power, Mixed' = 'Single Operator Low Power, Mixed',
   'Single Operator QRP, Mixed' = 'Single Operator QRP, Mixed',
   'Single Operator High Power, All CW' = 'Single Operator High Power, All CW',
-  'Single Operator Low Power, All CW' = 'Single Operator Low Power, All CW'
+  'Single Operator Low Power, All CW' = 'Single Operator Low Power, All CW',
+  'Single Operator High Power, All SSB' = 'Single Operator High Power, All SSB',
+  'Single Operator Low Power, All SSB' = 'Single Operator Low Power, All SSB'
 }
 
 interface Submission {
