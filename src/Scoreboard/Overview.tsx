@@ -30,6 +30,40 @@ export default function Overview({
     setCategory(value);
   };
 
+  const renderHighscore = (submissions: Submission[]) => {
+    const highScore = submissions.reduce(
+      (acc: { claimedScore: number; callsign: string }, current) => {
+        return current.claimedScore > acc.claimedScore
+          ? {
+              claimedScore: current.claimedScore,
+              callsign: current.callsign
+            }
+          : acc;
+      },
+      { claimedScore: 0, callsign: '' }
+    );
+
+    return (
+      <React.Fragment>
+        <Typography component="p" variant="h4" sx={{ display: 'inline' }}>
+          {highScore.claimedScore}
+        </Typography>
+        {highScore.callsign && (
+          <Typography
+            component="p"
+            variant="h4"
+            sx={{ mx: 1, display: 'inline', fontWeight: 200 }}
+          >
+            &ndash;
+          </Typography>
+        )}
+        <Typography component="p" variant="h4" sx={{ display: 'inline' }}>
+          {highScore.callsign}
+        </Typography>
+      </React.Fragment>
+    );
+  };
+
   return (
     <React.Fragment>
       <Box
@@ -71,11 +105,7 @@ export default function Overview({
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Total Submissions
       </Typography>
-      <Typography component="p" variant="h4">
-        {submissions.reduce((acc, current) => {
-          return current.claimedScore > acc ? current.claimedScore : acc;
-        }, 0)}
-      </Typography>
+      <Box>{renderHighscore(submissions)}</Box>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         High Score
       </Typography>
