@@ -97,7 +97,7 @@ const AppContent = () => {
                 cursor: 'pointer',
                 ml: { xs: '0', sm: '1rem' }
               }}
-              onClick={() => navigate('/')}
+              onClick={() => location.assign('https://noiseblankers.com')}
             >
               sponsored by the Noise Blankers Radio Group
             </Typography>
