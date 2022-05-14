@@ -63,6 +63,13 @@ export default function Submit() {
     gaEventTracker('select file', 'selected_file');
   };
 
+  const setLocationValue = (value: string | null) => {
+    setFormValues({
+      ...formValues,
+      location: value ?? ''
+    });
+  };
+
   const handleInputChange = (e: any) => {
     let { name, value } = e.target;
     switch (name) {
@@ -104,7 +111,6 @@ export default function Submit() {
     if (!selectedFile || !currentContest) return;
     const formData = new FormData();
     formData.append('contestId', currentContest.id);
-
     Object.entries(formValues).map(([k, v]) => {
       formData.append(k, v.toString());
     });
@@ -273,6 +279,9 @@ export default function Submit() {
                     disablePortal
                     id="combo-box-demo"
                     options={Object.keys(Location)}
+                    onChange={(e: any, newValue: string | null) => {
+                      setLocationValue(newValue);
+                    }}
                     renderInput={(params) => (
                       <TextField
                         required
