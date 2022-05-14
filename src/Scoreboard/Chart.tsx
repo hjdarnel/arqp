@@ -27,7 +27,7 @@ export default function Chart({ submissions }: { submissions: Submission[] }) {
           />
           <Tooltip />
           <YAxis dataKey="claimedScore" type="number" hide />
-          <Bar dataKey="claimedScore" name="Count" fill="#448AFF" />
+          <Bar dataKey="claimedScore" name="Score" fill="#448AFF" />
         </BarChart>
       </ResponsiveContainer>
     </React.Fragment>

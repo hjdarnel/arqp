@@ -256,27 +256,36 @@ const handler: Handler = async (event, context) => {
     console.log(`Parsed ${parsed.QSO.length} QSO records`);
     console.info({ ...parsed, QSO: 'omitted' });
 
-    const created = await prisma.submission.create({
-      data: {
-        contestId: currentContest.id,
-        email: body.email,
-        callsign: body.callsign,
-        category: body.category,
-        contestLocation: body.location,
-        multipleOperators: body.multipleOperators === 'true',
-        assistance: body.assistance === 'true',
-        name: parsed.NAME,
-        club: parsed.CLUB,
-        claimedScore: Number.parseInt(body.claimedScore),
-        logLocation: parsed.LOCATION,
-        logEmail: parsed.EMAIL,
-        logOperator: parsed['CATEGORY-OPERATOR'].split('-')[0],
-        logStation: parsed['CATEGORY-STATION'],
-        logTransmitter: parsed['CATEGORY-TRANSMITTER'],
-        logPower: parsed['CATEGORY-POWER'],
-        logAssisted: parsed['CATEGORY-ASSISTED'] === 'ASSISTED',
-        logBand: parsed['CATEGORY-BAND'],
-        logMode: parsed['CATEGORY-MODE']
+    const data = {
+      contestId: currentContest.id,
+      email: body.email,
+      callsign: body.callsign,
+      category: body.category,
+      contestLocation: body.location,
+      multipleOperators: body.multipleOperators === 'true',
+      assistance: body.assistance === 'true',
+      name: parsed.NAME,
+      club: parsed.CLUB,
+      claimedScore: Number.parseInt(body.claimedScore),
+      logLocation: parsed.LOCATION,
+      logEmail: parsed.EMAIL,
+      logOperator: parsed['CATEGORY-OPERATOR'].split('-')[0],
+      logStation: parsed['CATEGORY-STATION'],
+      logTransmitter: parsed['CATEGORY-TRANSMITTER'],
+      logPower: parsed['CATEGORY-POWER'],
+      logAssisted: parsed['CATEGORY-ASSISTED'] === 'ASSISTED',
+      logBand: parsed['CATEGORY-BAND'],
+      logMode: parsed['CATEGORY-MODE']
+    };
+
+    const created = await prisma.submission.upsert({
+      create: data,
+      update: data,
+      where: {
+        callsign_contestId: {
+          callsign: data.callsign,
+          contestId: data.contestId
+        }
       }
     });
 
