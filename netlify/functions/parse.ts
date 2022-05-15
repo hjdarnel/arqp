@@ -144,6 +144,7 @@ enum Location {
 }
 
 enum Category {
+  'DX' = 'DX',
   'Digital' = 'Digital',
   'Mobile Inside Arkansas' = 'Mobile Inside Arkansas',
   'Mobile Outside Arkansas' = 'Mobile Outside Arkansas',
