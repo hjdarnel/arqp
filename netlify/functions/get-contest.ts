@@ -10,6 +10,9 @@ const handler: Handler = async (event, context) => {
 
     if (!currentContest) {
       const latest = await prisma.contest.findFirst({
+        where: {
+          timeStart: { lt: new Date() }
+        },
         orderBy: { timeEnd: 'desc' },
         take: 1
       });
