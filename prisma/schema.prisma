@@ -14,6 +14,7 @@ model Contest {
   timeStart   DateTime     @default(now())
   timeEnd     DateTime     @default(now())
   submissions Submission[]
+  auditLog    AuditLog[]
 
   @@index([title, timeStart(sort: Desc)])
 }
@@ -43,6 +44,33 @@ model Submission {
   logMode           Mode?
   created_at        DateTime     @default(now())
   @@unique([callsign, contestId])
+  @@index([callsign, contestId, created_at(sort: Desc)])
+}
+
+model AuditLog {
+
+  id                String       @id @default(auto()) @map("_id") @db.ObjectId
+  contest           Contest      @relation(fields: [contestId], references: [id])
+  contestId         String       @db.ObjectId
+  callsign          String
+  email             String
+  category          String
+  contestLocation   String
+  assistance        Boolean      @default(false)
+  multipleOperators Boolean      @default(false)
+  claimedScore      Int          @default(0)
+  name              String?
+  club              String?
+  logEmail          String?
+  logLocation       String?
+  logOperator       Operator?
+  logStation        Station?
+  logTransmitter    Transmitter?
+  logPower          Power?
+  logAssisted       Boolean?
+  logBand           String?
+  logMode           Mode?
+  created_at        DateTime     @default(now())
   @@index([callsign, contestId, created_at(sort: Desc)])
 }
 
