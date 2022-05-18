@@ -48,7 +48,7 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText
         sx={{ display: { xs: 'none', md: 'block' } }}
-        primary="Export Results"
+        primary="Export All Results"
       />
     </ListItemButton>
   </React.Fragment>

@@ -104,7 +104,7 @@ const AppContent = () => {
           </Toolbar>
         </MuiAppBar>
         <Divider />
-        <List component="nav">
+        <List component="nav" sx={{ flexShrink: 0 }}>
           <Toolbar />
           {mainListItems}
           <Divider sx={{ my: 1 }} />
