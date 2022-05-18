@@ -4,7 +4,9 @@ const prisma = new PrismaClient();
 
 const handler: Handler = async (event, context) => {
   try {
-    const contests = await prisma.contest.findMany();
+    const contests = await prisma.contest.findMany({
+      orderBy: { timeStart: 'desc' }
+    });
 
     return {
       statusCode: 200,
