@@ -25,6 +25,8 @@ import useAnalyticsEventTracker from '../util/analytics';
 import { postSubmission } from '../util/post-submission';
 import { Category } from '../util/categories';
 import { Location } from '../util/locations';
+import LogRocket from 'logrocket';
+import ReactGA from 'react-ga4';
 
 const defaultValues = {
   callsign: '',
@@ -107,6 +109,11 @@ export default function Submit() {
     e.preventDefault();
     setIsLoading(true);
     gaEventTracker('submit log', 'submit_log');
+
+    LogRocket.identify(formValues.callsign, {
+      email: formValues.email,
+      location: formValues.location
+    });
 
     if (!selectedFile || !currentContest) return;
     const formData = new FormData();
