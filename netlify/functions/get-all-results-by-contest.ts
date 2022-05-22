@@ -6,9 +6,7 @@ const handler: Handler = async (event, context) => {
   try {
     const result = await prisma.submission.findMany({
       where: {
-        contestId: event.queryStringParameters['contestId'],
-        assistance: false,
-        logAssisted: false
+        contestId: event.queryStringParameters['contestId']
       }
     });
 
