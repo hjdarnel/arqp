@@ -14,11 +14,24 @@ import Results from './Results';
 
 export default function Scoreboard() {
   const [results, setResults] = useState<Submission[]>([]);
+  const [filteredResults, setFilteredResults] = useState<Submission[]>([]);
+
+  const updateFilteredResults = (category: string) => {
+    setFilteredResults(
+      results?.filter((x) => {
+        if (!category || category === 'All Categories') return true;
+        return x.category === category;
+      })
+    );
+  };
 
   useEffect(() => {
     getContest()
       .then((response) => getAllResultsByContest(response.id))
-      .then((results) => setResults(results))
+      .then((results) => {
+        setResults(results);
+        setFilteredResults(results);
+      })
       .catch((err) => {
         console.error(err);
         toast.error(
@@ -54,7 +67,7 @@ export default function Scoreboard() {
                 height: 340
               }}
             >
-              <Chart submissions={results} />
+              <Chart submissions={filteredResults} />
             </Paper>
           </Grid>
           {/* Overview */}
@@ -67,13 +80,16 @@ export default function Scoreboard() {
                 minHeight: 340
               }}
             >
-              <Overview allSubmissions={results || []} />
+              <Overview
+                submissions={filteredResults || []}
+                updateFilteredResults={updateFilteredResults}
+              />
             </Paper>
           </Grid>
           {/* Results */}
           <Grid item xs={12} sm={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Results submissions={results} />
+              <Results submissions={filteredResults} />
             </Paper>
           </Grid>
         </Grid>

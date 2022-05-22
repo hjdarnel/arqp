@@ -7,27 +7,20 @@ import { Category } from '../util/categories';
 import { FormControl, InputLabel, Select, MenuItem, Box } from '@mui/material';
 
 export default function Overview({
-  allSubmissions
+  submissions,
+  updateFilteredResults
 }: {
-  allSubmissions: Submission[];
+  submissions: Submission[];
+  updateFilteredResults: (category: string) => void;
 }) {
   const [category, setCategory] = useState<'All Categories' | Category>(
     'All Categories'
   );
-  const [submissions, setSubmissions] = useState<Submission[]>(allSubmissions);
-
-  useEffect(() => {
-    setSubmissions(
-      allSubmissions?.filter((x) => {
-        if (!category || category === 'All Categories') return true;
-        return x.category === category;
-      })
-    );
-  }, [allSubmissions, category]);
 
   const onCategoryChange = (e: any) => {
     const { value } = e.target;
     setCategory(value);
+    updateFilteredResults(value);
   };
 
   const renderHighscore = (submissions: Submission[]) => {
