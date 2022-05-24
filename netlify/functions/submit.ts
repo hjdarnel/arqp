@@ -271,13 +271,26 @@ const handler: Handler = async (event, context) => {
       claimedScore: Number.parseInt(body.claimedScore),
       logLocation: parsed.LOCATION,
       logEmail: parsed.EMAIL,
-      logOperator: parsed['CATEGORY-OPERATOR'].split('-')[0],
-      logStation: parsed['CATEGORY-STATION'],
-      logTransmitter: parsed['CATEGORY-TRANSMITTER'],
-      logPower: parsed['CATEGORY-POWER'],
-      logAssisted: parsed['CATEGORY-ASSISTED'] === 'ASSISTED',
-      logBand: parsed['CATEGORY-BAND'],
-      logMode: parsed['CATEGORY-MODE']
+      logOperator:
+        parsed['CATEGORY-OPERATOR']?.split('-')[0].toUpperCase() ??
+        parsed['Category-Operator'].split('-')[0].toUpperCase(),
+      logStation:
+        parsed['CATEGORY-STATION']?.toUpperCase() ??
+        parsed['Category-Station']?.toUpperCase(),
+      logTransmitter:
+        parsed['CATEGORY-TRANSMITTER']?.toUpperCase() ??
+        parsed['Category-Transmitter']?.toUpperCase(),
+      logPower:
+        parsed['CATEGORY-POWER']?.toUpperCase() ??
+        parsed['Category-Power']?.toUpperCase(),
+      logAssisted:
+        (parsed['CATEGORY-ASSISTED']?.toUpperCase() ?? false) === 'ASSISTED',
+      logBand:
+        parsed['CATEGORY-BAND']?.toUpperCase() ??
+        parsed['Category-Band']?.toUpperCase(),
+      logMode:
+        parsed['CATEGORY-MODE']?.toUpperCase() ??
+        parsed['Category-Mode']?.toUpperCase()
     };
 
     const [, created] = await prisma.$transaction([
