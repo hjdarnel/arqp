@@ -115,4 +115,5 @@ enum Mode {
   RTTY
   SSB
   MIXED
+  PHONE
 }
