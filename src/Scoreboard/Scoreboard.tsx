@@ -8,7 +8,7 @@ import Overview from './Overview';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { getAllResultsByContest } from '../util/get-all-results-by-contest';
-import { getContest } from '../util/get-contest';
+import { getLatestContest } from '../util/get-latest-contest';
 import { Submission } from '@prisma/client';
 import Results from './Results';
 
@@ -26,8 +26,10 @@ export default function Scoreboard() {
   };
 
   useEffect(() => {
-    getContest()
-      .then((response) => getAllResultsByContest(response.id))
+    const ac = new AbortController();
+
+    getLatestContest(ac)
+      .then((response) => getAllResultsByContest(ac, response.id))
       .then((results) => {
         setResults(results);
         setFilteredResults(results);
@@ -39,6 +41,12 @@ export default function Scoreboard() {
           { duration: 6000 }
         );
       });
+
+    return () => {
+      setResults([]);
+      setFilteredResults([]);
+      ac.abort();
+    };
   }, []);
 
   return (

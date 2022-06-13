@@ -2,6 +2,7 @@ import { Submission } from '@prisma/client';
 import { responseHandler } from './responseHandler';
 
 export const getResult = async (
+  ac: AbortController,
   contestId: string,
   callsign: string
 ): Promise<Submission[]> => {
@@ -10,6 +11,11 @@ export const getResult = async (
       new URLSearchParams({
         contestId,
         callsign
-      })
-  ).then(responseHandler);
+      }),
+    { signal: ac.signal }
+  )
+    .then(responseHandler)
+    .catch((error) => {
+      if (error.name === 'AbortError') return;
+    });
 };

@@ -29,10 +29,12 @@ export default function Search() {
   const gaEventTracker = useAnalyticsEventTracker();
 
   useEffect(() => {
-    getAllContests()
+    const ac = new AbortController();
+
+    getAllContests(ac)
       .then((response) => {
         setAllContests(response);
-        setSelectedContest(response[0].id);
+        setSelectedContest(response?.[0].id);
       })
       .catch((err) => {
         console.error(err);
@@ -42,6 +44,12 @@ export default function Search() {
         );
       })
       .finally(() => setIsLoading(false));
+
+    return () => {
+      setAllContests([]);
+      setSelectedContest('');
+      ac.abort();
+    };
   }, []);
 
   const fetchResults = (e: any) => {
@@ -50,7 +58,9 @@ export default function Search() {
     gaEventTracker('search results', 'search_results');
 
     if (!selectedCall || selectedContest === '') return setIsLoading(false);
-    getResult(selectedContest, selectedCall)
+
+    const ac = new AbortController();
+    getResult(ac, selectedContest, selectedCall)
       .then((x) => {
         setResults(x);
       })
@@ -63,6 +73,10 @@ export default function Search() {
         );
       })
       .finally(() => setIsLoading(false));
+    return () => {
+      setResults(undefined);
+      ac.abort();
+    };
   };
 
   const contestChangeHandler = (event: any) => {

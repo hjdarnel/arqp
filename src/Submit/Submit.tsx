@@ -19,14 +19,13 @@ import { useEffect, useState } from 'react';
 import FileInput from './FileInput';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { getContest } from '../util/get-contest';
+import { getActiveContest } from '../util/get-active-contest';
 import { Contest } from '@prisma/client';
 import useAnalyticsEventTracker from '../util/analytics';
 import { postSubmission } from '../util/post-submission';
 import { Category } from '../util/categories';
 import { Location } from '../util/locations';
 import LogRocket from 'logrocket';
-import ReactGA from 'react-ga4';
 
 const defaultValues = {
   callsign: '',
@@ -47,7 +46,9 @@ export default function Submit() {
   const gaEventTracker = useAnalyticsEventTracker();
 
   useEffect(() => {
-    getContest()
+    const ac = new AbortController();
+
+    getActiveContest(ac)
       .then((response) => setCurrentContest(response))
       .catch((err) => {
         console.error(err);
@@ -58,7 +59,16 @@ export default function Submit() {
         return navigate('/');
       })
       .finally(() => setIsLoading(false));
+
+    return () => ac.abort();
   }, []);
+
+  useEffect(() => {
+    if (!currentContest) {
+      toast.error(`No contest is currently running!`, { duration: 6000 });
+      return navigate('/');
+    }
+  }, [currentContest]);
 
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);
@@ -128,7 +138,9 @@ export default function Submit() {
       selectedFile.name
     );
 
-    postSubmission(formData)
+    const ac = new AbortController();
+
+    postSubmission(ac, formData)
       .then(() => {
         toast.success('Successfully submitted!', { duration: 6000 });
         navigate('/');
@@ -143,6 +155,9 @@ export default function Submit() {
       .finally(() => {
         setIsLoading(false);
       });
+    return () => {
+      ac.abort();
+    };
   };
 
   return (

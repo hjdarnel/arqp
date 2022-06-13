@@ -1,10 +1,10 @@
 import { Contest } from '@prisma/client';
 import { responseHandler } from './responseHandler';
 
-export const getAllContests = async (
+export const getLatestContest = async (
   ac: AbortController
-): Promise<Contest[]> => {
-  return fetch('/api/get-all-contests', {
+): Promise<Contest> => {
+  return fetch('/api/get-latest-contest', {
     signal: ac.signal,
     method: 'GET'
   })

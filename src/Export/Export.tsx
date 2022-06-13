@@ -50,10 +50,12 @@ export default function Export() {
   };
 
   useEffect(() => {
-    getAllContests()
+    const ac = new AbortController();
+
+    getAllContests(ac)
       .then((response) => {
         setAllContests(response);
-        setSelectedContest(response[0].id);
+        setSelectedContest(response?.[0].id);
       })
       .catch((err) => {
         console.error(err);
@@ -63,6 +65,12 @@ export default function Export() {
         );
       })
       .finally(() => setIsLoading(false));
+
+    return () => {
+      setAllContests([]);
+      setSelectedContest('');
+      ac.abort();
+    };
   }, []);
 
   const contestChangeHandler = (event: any) => {
