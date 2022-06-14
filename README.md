@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This is a SPA to allow uploading amateur radio log files in a standardized format, parse the score and relevant details, and display results for any past or current contest. Specially attention is paid to reusability, displaying past results, and allowing analytics of results by category. 
+This is a SPA to allow uploading amateur radio log files in a standardized format, parse the score and relevant details, and display results for any past or current contest. Specially attention is paid to reusability, displaying past results, and allowing analytics of results by category.
 
 ## Tech
 
