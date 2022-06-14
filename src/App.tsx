@@ -57,7 +57,7 @@ export default function App() {
         >
           {'Copyright © '}
           <br />
-          <Link color="inherit" href="https://github.com/hjdarnel">
+          <Link color="inherit" href="https://github.com/hjdarnel/arqp">
             Henry Darnell
           </Link>{' '}
           {new Date().getFullYear()}
