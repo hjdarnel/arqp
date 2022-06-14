@@ -10,6 +10,6 @@ export const getAllContests = async (
   })
     .then(responseHandler)
     .catch((error) => {
-      if (error.name === 'AbortError') return;
+      if (ac.signal.aborted) return;
     });
 };

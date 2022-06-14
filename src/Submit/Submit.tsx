@@ -49,7 +49,9 @@ export default function Submit() {
     const ac = new AbortController();
 
     getActiveContest(ac)
-      .then((response) => setCurrentContest(response))
+      .then((response) => {
+        if (!ac.signal.aborted) setCurrentContest(response);
+      })
       .catch((err) => {
         console.error(err);
         toast.error(
@@ -142,6 +144,7 @@ export default function Submit() {
 
     postSubmission(ac, formData)
       .then(() => {
+        if (ac.signal.aborted) return;
         toast.success('Successfully submitted!', { duration: 6000 });
         navigate('/');
       })

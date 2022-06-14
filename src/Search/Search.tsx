@@ -33,8 +33,9 @@ export default function Search() {
 
     getAllContests(ac)
       .then((response) => {
+        if (ac.signal.aborted) return;
         setAllContests(response);
-        setSelectedContest(response?.[0].id);
+        setSelectedContest(response[0].id);
       })
       .catch((err) => {
         console.error(err);
@@ -62,6 +63,8 @@ export default function Search() {
     const ac = new AbortController();
     getResult(ac, selectedContest, selectedCall)
       .then((x) => {
+        if (ac.signal.aborted) return;
+
         setResults(x);
       })
       .catch((err) => {

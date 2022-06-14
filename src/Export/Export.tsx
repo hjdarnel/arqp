@@ -54,6 +54,8 @@ export default function Export() {
 
     getAllContests(ac)
       .then((response) => {
+        if (ac.signal.aborted) return;
+
         setAllContests(response);
         setSelectedContest(response?.[0].id);
       })

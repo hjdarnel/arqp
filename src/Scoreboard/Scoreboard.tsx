@@ -29,7 +29,10 @@ export default function Scoreboard() {
     const ac = new AbortController();
 
     getLatestContest(ac)
-      .then((response) => getAllResultsByContest(ac, response.id))
+      .then((response) => {
+        if (ac.signal.aborted) return [];
+        return getAllResultsByContest(ac, response.id);
+      })
       .then((results) => {
         setResults(results);
         setFilteredResults(results);

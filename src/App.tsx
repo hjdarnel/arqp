@@ -24,7 +24,10 @@ export default function App() {
     const ac = new AbortController();
 
     getActiveContest(ac)
-      .then((response) => setCurrentContest(response))
+      .then((response) => {
+        if (ac.signal.aborted) return;
+        setCurrentContest(response);
+      })
       .catch((err) => {
         console.error(err);
       });
