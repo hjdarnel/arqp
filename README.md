@@ -21,3 +21,7 @@ View the contest rules/more information at https://arkqp.com
 - Github Codespaces are supported
 - Copy `.env.example` to `.env` and replace database username/password (or use a local connection string)
 - `npm install` and `npx netlify dev` to build in dev mode, including backend functions
+
+## Copyright
+
+All Rights Reserved. Copyright © 2022 Henry Darnell
