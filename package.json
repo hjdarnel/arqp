@@ -17,6 +17,7 @@
     "@mui/x-data-grid": "~5.10.0",
     "@netlify/functions": "~1.0.0",
     "@prisma/client": "~3.13.0",
+    "aws-sdk": "~2.1211.0",
     "busboy": "~1.4.0",
     "cabrillo": "~0.1.0",
     "logrocket": "~3.0.0",

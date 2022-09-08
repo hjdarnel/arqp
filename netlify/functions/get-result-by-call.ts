@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 const handler: Handler = async (event, context) => {
   try {
     const alphanum = /^[a-zA-Z0-9]+$/;
-    const contestId = event.queryStringParameters['contestId'];
-    const callsign = event.queryStringParameters['callsign'];
+    const contestId = event.queryStringParameters?.['contestId'];
+    const callsign = event.queryStringParameters?.['callsign'];
 
     if (!contestId || !alphanum.test(contestId)) {
       return {
@@ -23,9 +23,9 @@ const handler: Handler = async (event, context) => {
 
     const result = await prisma.submission.findMany({
       where: {
-        contestId: event.queryStringParameters['contestId'],
+        contestId: event.queryStringParameters?.['contestId'],
         callsign: {
-          contains: event.queryStringParameters['callsign'],
+          contains: event.queryStringParameters?.['callsign'],
           mode: 'insensitive'
         }
       }

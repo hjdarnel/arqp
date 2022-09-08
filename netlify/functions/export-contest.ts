@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 
 const handler: Handler = async (event, context) => {
   try {
-    const contestId = event.queryStringParameters['contestId'];
+    const contestId = event.queryStringParameters?.['contestId'];
 
     if (!contestId) throw new Error('Missing required parameter contestId');
 
-    const password = event.queryStringParameters['password'];
+    const password = event.queryStringParameters?.['password'];
 
     if (!password) throw new Error('Missing required parameter password');
     if (password !== process.env.ADMIN_PASSWORD)
@@ -24,7 +24,7 @@ const handler: Handler = async (event, context) => {
       };
 
     const contest = await prisma.contest.findUnique({
-      where: { id: event.queryStringParameters['contestId'] }
+      where: { id: event.queryStringParameters?.['contestId'] }
     });
 
     if (!contest)
@@ -32,13 +32,13 @@ const handler: Handler = async (event, context) => {
         statusCode: 404,
         body: JSON.stringify({
           error: {
-            message: `No contest found for id ${event.queryStringParameters['contestId']}`
+            message: `No contest found for id ${event.queryStringParameters?.['contestId']}`
           }
         })
       };
 
     const submissions = await prisma.submission.findMany({
-      where: { contestId: event.queryStringParameters['contestId'] }
+      where: { contestId: event.queryStringParameters?.['contestId'] }
     });
 
     const csv = await writeToBuffer(submissions, { headers: true });

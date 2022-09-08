@@ -10,7 +10,7 @@ const handler: Handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(currentContest ?? null)
+      body: JSON.stringify(currentContest)
     };
   } catch (err: any) {
     console.error(err);

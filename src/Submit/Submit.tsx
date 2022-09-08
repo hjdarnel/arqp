@@ -50,7 +50,12 @@ export default function Submit() {
 
     getActiveContest(ac)
       .then((response) => {
-        if (!ac.signal.aborted) setCurrentContest(response);
+        if (ac.signal.aborted) return;
+        setCurrentContest(response);
+        if (!response) {
+          toast.error(`No contest is currently running!`, { duration: 6000 });
+          return navigate('/');
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -64,13 +69,6 @@ export default function Submit() {
 
     return () => ac.abort();
   }, []);
-
-  useEffect(() => {
-    if (!currentContest) {
-      toast.error(`No contest is currently running!`, { duration: 6000 });
-      return navigate('/');
-    }
-  }, [currentContest]);
 
   const fileChangeHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);

@@ -2,6 +2,21 @@ import { cabrilloToObject } from 'cabrillo';
 import { Handler } from '@netlify/functions';
 import Busboy from 'busboy';
 import { PrismaClient } from '@prisma/client';
+import AWS from 'aws-sdk';
+
+if (
+  !process.env.AWS_S3_BUCKET_NAME ||
+  !process.env.AWS_S3_ACCESS_KEY_ID ||
+  !process.env.AWS_S3_SECRET_ACCESS_KEY
+) {
+  throw new Error('Missing env variables');
+}
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY
+});
+
 const prisma = new PrismaClient();
 
 enum Location {
@@ -162,32 +177,21 @@ enum Category {
 }
 
 interface Submission {
-  file?: {
+  file: {
     content: string;
     filename: {
       filename: string;
     };
   };
-  callsign?: string;
-  email?: string;
-  category?: Category;
-  location?: Location;
-  assistance?: string;
-  multipleOperators?: string;
-  contestId?: string;
-  claimedScore?: string;
+  callsign: string;
+  email: string;
+  category: Category;
+  location: Location;
+  assistance: string;
+  multipleOperators: string;
+  contestId: string;
+  claimedScore: string;
 }
-
-const validateBody = (body: any): string => {
-  if (!body.email) return 'Missing email!';
-  if (!body.callsign) return 'Missing callsign!';
-  if (!body.category || !Object.values(Category).includes(body.category))
-    return 'Missing Category!';
-  if (!body.location || !Object.values(Location).includes(body.location))
-    return 'Missing location!';
-  if (!body.claimedScore) return 'Missing score!';
-  return null;
-};
 
 const parseMultipartForm = (event): Promise<Submission> => {
   return new Promise((resolve) => {
@@ -212,7 +216,7 @@ const parseMultipartForm = (event): Promise<Submission> => {
     });
 
     busboy.on('finish', () => {
-      resolve(fields);
+      resolve(fields as Submission);
     });
 
     busboy.write(Buffer.from(event.body, 'base64').toString('utf8'));
@@ -231,11 +235,17 @@ const handler: Handler = async (event, context) => {
     if (!event.body) throw new Error('Missing request body');
 
     const body = await parseMultipartForm(event);
-    if (!body?.file) throw new Error('Missing required file');
+    if (!body.file || !body.file.content || !body.file.filename)
+      throw new Error('Missing required file');
     console.log('Received request', { ...body, file: 'omitted' });
 
-    const validationError = validateBody(body);
-    if (validationError) throw new Error(validationError);
+    if (!body.email) throw new Error('Missing email!');
+    if (!body.callsign) throw new Error('Missing callsign!');
+    if (!body.category || !Object.values(Category).includes(body.category))
+      throw new Error('Missing Category!');
+    if (!body.location || !Object.values(Location).includes(body.location))
+      throw new Error('Missing location!');
+    if (!body.claimedScore) throw new Error('Missing score!');
 
     let parsed;
     try {
@@ -306,6 +316,19 @@ const handler: Handler = async (event, context) => {
         }
       })
     ]);
+
+    const uploaded = await s3
+      .upload({
+        Bucket: process.env.AWS_S3_BUCKET_NAME!,
+        Key: `${currentContest.title}/${body.callsign}-${Date.now()}-${
+          body.file.filename.filename
+        }`,
+        Body: body.file.content,
+        ACL: 'public-read'
+      })
+      .promise();
+
+    console.log(uploaded.Location);
 
     return {
       statusCode: 200,
