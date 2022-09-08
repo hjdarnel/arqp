@@ -11,5 +11,6 @@ export const getAllContests = async (
     .then(responseHandler)
     .catch((error) => {
       if (ac.signal.aborted) return;
+      throw error;
     });
 };

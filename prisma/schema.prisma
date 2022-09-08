@@ -20,7 +20,6 @@ model Contest {
 }
 
 model Submission {
-
   id                String       @id @default(auto()) @map("_id") @db.ObjectId
   contest           Contest      @relation(fields: [contestId], references: [id])
   contestId         String       @db.ObjectId
@@ -33,6 +32,7 @@ model Submission {
   claimedScore      Int          @default(0)
   name              String?
   club              String?
+  logScore          Int          @default(0)
   logEmail          String?
   logLocation       String?
   logOperator       Operator?
@@ -43,12 +43,12 @@ model Submission {
   logBand           String?
   logMode           Mode?
   created_at        DateTime     @default(now())
+
   @@unique([callsign, contestId])
   @@index([callsign, contestId, created_at(sort: Desc)])
 }
 
 model AuditLog {
-
   id                String       @id @default(auto()) @map("_id") @db.ObjectId
   contest           Contest      @relation(fields: [contestId], references: [id])
   contestId         String       @db.ObjectId
@@ -61,6 +61,7 @@ model AuditLog {
   claimedScore      Int          @default(0)
   name              String?
   club              String?
+  logScore          Int          @default(0)
   logEmail          String?
   logLocation       String?
   logOperator       Operator?
@@ -71,6 +72,7 @@ model AuditLog {
   logBand           String?
   logMode           Mode?
   created_at        DateTime     @default(now())
+
   @@index([callsign, contestId, created_at(sort: Desc)])
 }
 

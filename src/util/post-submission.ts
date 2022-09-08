@@ -13,5 +13,6 @@ export const postSubmission = async (
     .then(responseHandler)
     .catch((error) => {
       if (error.name === 'AbortError') return;
+      throw error;
     });
 };

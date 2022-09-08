@@ -279,6 +279,9 @@ const handler: Handler = async (event, context) => {
       name: parsed.NAME,
       club: parsed.CLUB,
       claimedScore: Number.parseInt(body.claimedScore),
+      logScore:
+        Number.parseInt(parsed['CLAIMED-SCORE']) ??
+        Number.parseInt(parsed['claimed-score']),
       logLocation: parsed.LOCATION,
       logEmail: parsed.EMAIL,
       logOperator:
@@ -336,8 +339,8 @@ const handler: Handler = async (event, context) => {
     };
   } catch (err: any) {
     console.error(err.message);
-    let message = err.message;
-    let statusCode = 400;
+    const message = err.message;
+    const statusCode = 400;
 
     if (process.env.NODE_ENV === 'development') {
       return {

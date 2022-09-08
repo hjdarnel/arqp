@@ -17,5 +17,6 @@ export const getResult = async (
     .then(responseHandler)
     .catch((error) => {
       if (ac.signal.aborted) return;
+      throw error;
     });
 };
