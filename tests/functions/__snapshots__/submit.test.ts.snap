@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot tests works on lowercase input 1`] = `
+Object {
+  "assistance": false,
+  "callsign": "ABC123",
+  "category": "SSB",
+  "claimedScore": 652,
+  "club": undefined,
+  "contestId": "123",
+  "contestLocation": undefined,
+  "email": "abc123@gmail.com",
+  "logAssisted": false,
+  "logBand": "ALL",
+  "logEmail": undefined,
+  "logLocation": undefined,
+  "logMode": "SSB",
+  "logOperator": "SINGLE",
+  "logPower": "QRP",
+  "logScore": NaN,
+  "logStation": "PORTABLE",
+  "logTransmitter": "ONE",
+  "multipleOperators": false,
+  "name": undefined,
+}
+`;
+
+exports[`snapshot tests works on normal input 1`] = `
+Object {
+  "assistance": false,
+  "callsign": "ABC123",
+  "category": "SSB",
+  "claimedScore": 652,
+  "club": undefined,
+  "contestId": "123",
+  "contestLocation": undefined,
+  "email": "abc123@gmail.com",
+  "logAssisted": false,
+  "logBand": "ALL",
+  "logEmail": "ABC123@arrl.net",
+  "logLocation": "AR",
+  "logMode": "SSB",
+  "logOperator": "SINGLE",
+  "logPower": "QRP",
+  "logScore": 652,
+  "logStation": "PORTABLE",
+  "logTransmitter": "ONE",
+  "multipleOperators": false,
+  "name": "Henry Darnell",
+}
+`;

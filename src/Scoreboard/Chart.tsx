@@ -23,7 +23,7 @@ const formatSubmissions = (
   }));
 
 const calculateTicks = (submissions: Submission[]): number[] => {
-  const ticks = [];
+  const ticks: number[] = [];
 
   const max = submissions.reduce((score: number, current) => {
     return current.claimedScore > score ? current.claimedScore : score;

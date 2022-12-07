@@ -25,5 +25,6 @@
     command = "npm run dev" # Command to start your dev server
     publish = "dist" # Folder with the static content for _redirect file
     functionsPort = 8885
+    targetPort = 3000
 
   ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
