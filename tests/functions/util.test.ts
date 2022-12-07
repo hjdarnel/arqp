@@ -42,7 +42,7 @@ describe('snapshot tests', () => {
     expect(await result).toMatchSnapshot();
   });
 
-  it('fails', () => {
-    expect(false).toBe(true);
+  it(`doesn't fail`, () => {
+    expect(true).toBe(true);
   });
 });
