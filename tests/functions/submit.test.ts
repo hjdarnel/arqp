@@ -2,7 +2,7 @@ import { Contest } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
 
-import { parse } from '../../netlify/functions/submit';
+import { parse } from '../../netlify/functions/util';
 
 const body = {
   email: 'abc123@gmail.com',
