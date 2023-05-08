@@ -110,7 +110,7 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                Arkansas QSO Party
+                {currentContest?.title ?? 'Arkansas QSO Party'}
               </Typography>
               <Typography
                 color="inherit"
