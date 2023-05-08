@@ -17,7 +17,7 @@
     "@mui/material": "~5.4.3",
     "@mui/x-data-grid": "~5.10.0",
     "@netlify/functions": "~1.0.0",
-    "@prisma/client": "~3.13.0",
+    "@prisma/client": "^4.13.0",
     "aws-sdk": "~2.1211.0",
     "busboy": "~1.4.0",
     "cabrillo": "~0.1.0",
@@ -37,7 +37,7 @@
     "@types/react-dom": "~17.0.10",
     "@vitejs/plugin-react": "~1.0.7",
     "jest": "~27.5.1",
-    "prisma": "~3.13.0",
+    "prisma": "^4.13.0",
     "ts-jest": "~27.1.5",
     "typescript": "~4.5.4",
     "vite": "~2.9.13"
