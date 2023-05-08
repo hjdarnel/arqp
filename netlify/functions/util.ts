@@ -64,6 +64,7 @@ export const parse = async (
       parsed['Category-Band']?.toUpperCase(),
     logMode:
       parsed['CATEGORY-MODE']?.toUpperCase() ??
-      parsed['Category-Mode']?.toUpperCase()
+      parsed['Category-Mode']?.toUpperCase(),
+    logFile: null
   };
 };
