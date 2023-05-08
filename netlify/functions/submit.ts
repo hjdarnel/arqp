@@ -249,6 +249,20 @@ const handler: Handler = async (event, context) => {
 
     const data = await parse(body, currentContest);
 
+    const uploaded = await s3
+      .upload({
+        Bucket: process.env.AWS_S3_BUCKET_NAME!,
+        Key: `${currentContest.title.replace(/\s/g, '_')}/${
+          body.callsign
+        }-${Date.now()}-${body.file.filename.filename}`,
+        Body: body.file.content,
+        ACL: 'public-read'
+      })
+      .promise();
+
+    data.logFile = uploaded.Location;
+    console.log(uploaded.Location);
+
     const [, created] = await prisma.$transaction([
       prisma.auditLog.create({ data }),
       prisma.submission.upsert({
@@ -262,19 +276,6 @@ const handler: Handler = async (event, context) => {
         }
       })
     ]);
-
-    const uploaded = await s3
-      .upload({
-        Bucket: process.env.AWS_S3_BUCKET_NAME!,
-        Key: `${currentContest.title}/${body.callsign}-${Date.now()}-${
-          body.file.filename.filename
-        }`,
-        Body: body.file.content,
-        ACL: 'public-read'
-      })
-      .promise();
-
-    console.log(uploaded.Location);
 
     return {
       statusCode: 200,

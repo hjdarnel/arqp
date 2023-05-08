@@ -43,6 +43,7 @@ model Submission {
   logBand           String?
   logMode           Mode?
   created_at        DateTime     @default(now())
+  logFile           String?
 
   @@unique([callsign, contestId])
   @@index([callsign, contestId, created_at(sort: Desc)])
@@ -71,6 +72,7 @@ model AuditLog {
   logAssisted       Boolean?
   logBand           String?
   logMode           Mode?
+  logFile           String?
   created_at        DateTime     @default(now())
 
   @@index([callsign, contestId, created_at(sort: Desc)])
