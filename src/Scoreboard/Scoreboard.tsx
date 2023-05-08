@@ -11,17 +11,29 @@ import { getAllResultsByContest } from '../util/get-all-results-by-contest';
 import { getLatestContest } from '../util/get-latest-contest';
 import { Submission } from '@prisma/client';
 import Results from './Results';
+import { Location } from '../util/locations';
+import { Category } from '../util/categories';
+
+export type ResultsFilter = {
+  category?: Category | 'All Categories';
+  location?: Location | 'All Locations';
+};
 
 export default function Scoreboard() {
   const [results, setResults] = useState<Submission[]>([]);
   const [filteredResults, setFilteredResults] = useState<Submission[]>([]);
 
-  const updateFilteredResults = (category: string) => {
+  const updateFilteredResults = ({ category, location }: ResultsFilter) => {
     setFilteredResults(
-      results?.filter((x) => {
-        if (!category || category === 'All Categories') return true;
-        return x.category === category;
-      })
+      results
+        ?.filter((x) => {
+          if (!category || category === 'All Categories') return true;
+          return x.category === category;
+        })
+        .filter((x) => {
+          if (!location || location === 'All Locations') return true;
+          return x.contestLocation === location;
+        })
     );
   };
 

@@ -1,26 +1,37 @@
 import Typography from '@mui/material/Typography';
 import Title from './Title';
 import { Submission } from '@prisma/client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Category } from '../util/categories';
+import { Location } from '../util/locations';
 
 import { FormControl, InputLabel, Select, MenuItem, Box } from '@mui/material';
+import { ResultsFilter } from './Scoreboard';
 
 export default function Overview({
   submissions,
   updateFilteredResults
 }: {
   submissions: Submission[];
-  updateFilteredResults: (category: string) => void;
+  updateFilteredResults: ({ category, location }: ResultsFilter) => void;
 }) {
   const [category, setCategory] = useState<'All Categories' | Category>(
     'All Categories'
+  );
+  const [location, setLocation] = useState<'All Locations' | Location>(
+    'All Locations'
   );
 
   const onCategoryChange = (e: any) => {
     const { value } = e.target;
     setCategory(value);
-    updateFilteredResults(value);
+    updateFilteredResults({ category: value, location });
+  };
+
+  const onLocationChange = (e: any) => {
+    const { value } = e.target;
+    setLocation(value);
+    updateFilteredResults({ category, location: value });
   };
 
   const renderHighscore = (submissions: Submission[]) => {
@@ -59,15 +70,13 @@ export default function Overview({
 
   return (
     <React.Fragment>
+      <Title>Overview</Title>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between'
+          flex: 1
         }}
       >
-        <Title>Overview</Title>
-        <FormControl>
+        <FormControl sx={{ marginRight: 2, marginBottom: 2 }}>
           <InputLabel id="category-select-label">Category</InputLabel>
           <Select
             sx={{ width: 160 }}
@@ -83,6 +92,30 @@ export default function Overview({
               {'All Categories'}
             </MenuItem>
             {Object.keys(Category).map((x) => {
+              return (
+                <MenuItem key={x} value={x}>
+                  {x}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ marginBottom: 2 }}>
+          <InputLabel id="location-select-label">Location</InputLabel>
+          <Select
+            sx={{ width: 160 }}
+            id="location-select"
+            labelId="location-select-label"
+            name="location"
+            value={location}
+            label="Location"
+            onChange={onLocationChange}
+            MenuProps={{ transitionDuration: 0 }}
+          >
+            <MenuItem key={'all'} value={'All Locations'}>
+              {'All Locations'}
+            </MenuItem>
+            {Object.keys(Location).map((x) => {
               return (
                 <MenuItem key={x} value={x}>
                   {x}
