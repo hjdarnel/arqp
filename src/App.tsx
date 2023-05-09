@@ -110,7 +110,7 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                {currentContest?.title ?? 'Arkansas QSO Party'}
+                {currentContest?.title ?? `Arkansas QSO Party ${new Date().getFullYear()}`}
               </Typography>
               <Typography
                 color="inherit"
