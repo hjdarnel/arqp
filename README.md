@@ -1,7 +1,7 @@
 # Arkansas QSO Party Scoreboard/Submission Site
 
 <a href="https://arkansasqp.netlify.app">
-  <img src="https://i0.wp.com/arkqp.com/wp-content/uploads/2020/11/Arkansas-QSO-Party-logo-red-letters.png?resize=768%2C768&ssl=1" width="200"/>
+  <img src="https://arkansasqp.netlify.app/Arkansas-QSO-Party-logo.png" width="200"/>
 </a>
 
 ## Purpose
