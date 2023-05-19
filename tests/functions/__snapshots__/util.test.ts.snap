@@ -2,7 +2,6 @@
 
 exports[`snapshot tests works on lowercase input 1`] = `
 Object {
-  "assistance": false,
   "callsign": "ABC123",
   "category": "SSB",
   "claimedScore": 652,
@@ -28,7 +27,6 @@ Object {
 
 exports[`snapshot tests works on normal input 1`] = `
 Object {
-  "assistance": false,
   "callsign": "ABC123",
   "category": "SSB",
   "claimedScore": 652,
