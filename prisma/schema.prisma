@@ -26,7 +26,6 @@ model Submission {
   email             String
   category          String
   contestLocation   String
-  assistance        Boolean      @default(false)
   multipleOperators Boolean      @default(false)
   claimedScore      Int          @default(0)
   name              String?
@@ -56,7 +55,6 @@ model AuditLog {
   email             String
   category          String
   contestLocation   String
-  assistance        Boolean      @default(false)
   multipleOperators Boolean      @default(false)
   claimedScore      Int          @default(0)
   name              String?

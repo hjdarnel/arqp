@@ -36,7 +36,6 @@ export const parse = async (
     category: body.category,
     contestLocation: body.location,
     multipleOperators: body.multipleOperators === 'true',
-    assistance: body.assistance === 'true',
     name: parsed.NAME,
     club: parsed.CLUB,
     claimedScore: Number.parseInt(body.claimedScore),

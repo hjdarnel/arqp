@@ -33,7 +33,6 @@ const defaultValues = {
   claimedScore: 0,
   category: '',
   location: '',
-  assistance: 'false',
   multipleOperators: 'false'
 };
 
@@ -191,7 +190,7 @@ export default function Submit() {
               {currentContest?.title})
             </Typography>
 
-            <Grid container rowSpacing={3} columnSpacing={1}>
+            <Grid container rowSpacing={3} columnSpacing={4}>
               <Grid item sm={4} md={3}>
                 <TextField
                   label="Callsign"
@@ -216,7 +215,7 @@ export default function Submit() {
                 />
               </Grid>
               <Grid item sm={8} md={3}>
-                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+                <FormControl variant="filled" required>
                   <TextField
                     InputProps={{
                       inputMode: 'numeric',
@@ -242,8 +241,9 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item sm={8} md={4}>
-                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+              <Grid item md={1}></Grid>
+              <Grid item sm={8} md={3}>
+                <FormControl variant="filled" required fullWidth>
                   <InputLabel id="category-select-label">Category</InputLabel>
                   <Select
                     id="category-select"
@@ -271,33 +271,8 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item sm={6} md={4}>
-                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
-                  <InputLabel id="power-select-label">
-                    Spotting Assistance
-                  </InputLabel>
-                  <Select
-                    id="power-select"
-                    labelId="power-select-label"
-                    name="assistance"
-                    value={formValues.assistance}
-                    label="Spotting Assistance"
-                    onChange={handleInputChange}
-                    MenuProps={{ transitionDuration: 0 }}
-                  >
-                    <MenuItem value="false">No</MenuItem>
-                    <MenuItem value="true">Yes</MenuItem>
-                  </Select>
-                  <FormHelperText>
-                    At any time during the contest, did you use spotting
-                    assistance of any kind, or software capable of
-                    simultaneously decoding multiple call signs?
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid item md={4}></Grid>
-              <Grid item sm={8} md={4}>
-                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+              <Grid item sm={8} md={3}>
+                <FormControl variant="filled" required fullWidth>
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
@@ -321,8 +296,8 @@ export default function Submit() {
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid item sm={6}>
-                <FormControl variant="filled" sx={{ minWidth: 160 }} required>
+              <Grid item sm={8} md={3}>
+                <FormControl variant="filled" required fullWidth>
                   <InputLabel id="power-select-label">Operators</InputLabel>
                   <Select
                     id="power-select"

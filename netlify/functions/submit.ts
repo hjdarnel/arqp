@@ -187,7 +187,6 @@ interface Submission {
   email: string;
   category: Category;
   location: Location;
-  assistance: string;
   multipleOperators: string;
   contestId: string;
   claimedScore: string;

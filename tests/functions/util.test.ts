@@ -10,7 +10,6 @@ const body = {
   category: 'SSB',
   contestLocation: 'AR - Arkansas',
   multipleOperators: false,
-  assistance: false,
   name: 'Henry Darnell',
   club: 'Big Bois',
   claimedScore: 652,
