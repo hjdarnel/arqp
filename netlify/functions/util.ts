@@ -13,10 +13,11 @@ export const parse = async (
     throw new Error('Cannot parse file as Cabrillo log. Is it a valid log?');
   }
 
-  Object.entries(parsed).map(([key, value]) => {
+  Object.entries(parsed).forEach(([key, value]) => {
     if (key === 'QSO') return (parsed[key] = value);
-    if (typeof value === 'string')
-      return (parsed[key] = value.replace('\r', ''));
+    if (typeof value === 'string') {
+      return (parsed[key] = value.trim().replace('\r', ''));
+    }
     return (parsed[key] = value);
   });
 

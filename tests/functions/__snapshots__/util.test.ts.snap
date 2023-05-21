@@ -49,3 +49,28 @@ Object {
   "name": "Henry Darnell",
 }
 `;
+
+exports[`snapshot tests works on padded input 1`] = `
+Object {
+  "callsign": "ABC123",
+  "category": "SSB",
+  "claimedScore": 652,
+  "club": "Hudson",
+  "contestId": "123",
+  "contestLocation": undefined,
+  "email": "abc123@gmail.com",
+  "logAssisted": true,
+  "logBand": undefined,
+  "logEmail": "REDACT.qrp@gmail.com",
+  "logFile": null,
+  "logLocation": "NY",
+  "logMode": "MIXED",
+  "logOperator": "SINGLE",
+  "logPower": "QRP",
+  "logScore": 1200,
+  "logStation": "FIXED",
+  "logTransmitter": undefined,
+  "multipleOperators": false,
+  "name": "REDACT",
+}
+`;

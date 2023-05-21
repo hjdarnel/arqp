@@ -41,6 +41,18 @@ describe('snapshot tests', () => {
     expect(await result).toMatchSnapshot();
   });
 
+  it('works on padded input', async () => {
+    const content = await fs.readFileSync(
+      path.join(__dirname, '../fixtures/padded.log')
+    );
+
+    const result = parse({ ...body, file: { content } }, {
+      id: '123'
+    } as Contest);
+
+    expect(await result).toMatchSnapshot();
+  });
+
   it(`doesn't fail`, () => {
     expect(true).toBe(true);
   });
