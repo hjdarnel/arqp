@@ -17,7 +17,7 @@ Object {
   "logMode": "SSB",
   "logOperator": "SINGLE",
   "logPower": "QRP",
-  "logScore": NaN,
+  "logScore": 652,
   "logStation": "PORTABLE",
   "logTransmitter": "ONE",
   "multipleOperators": false,

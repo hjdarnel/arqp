@@ -40,9 +40,11 @@ export const parse = async (
     name: parsed.NAME,
     club: parsed.CLUB,
     claimedScore: Number.parseInt(body.claimedScore),
-    logScore:
-      Number.parseInt(parsed['CLAIMED-SCORE']) ??
-      Number.parseInt(parsed['claimed-score']),
+    logScore: parsed['CLAIMED-SCORE']
+      ? Number.parseInt(parsed['CLAIMED-SCORE'])
+      : parsed['Claimed-Score']
+      ? Number.parseInt(parsed['Claimed-Score'])
+      : null,
     logLocation: parsed.LOCATION,
     logEmail: parsed.EMAIL,
     logOperator:
