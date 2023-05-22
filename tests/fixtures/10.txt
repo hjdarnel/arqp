@@ -1,0 +1,43 @@
+START-OF-LOG: 2.0
+CONTEST: ARQP
+CALLSIGN: REDACT
+CATEGORY: SINGLE-OP ALL LOW CW
+CLAIMED-SCORE: 790
+CLUB: NONE
+CREATED-BY: NOTEPAD
+NAME: Henry Darnell
+ADDRESS:
+ADDRESS-CITY:
+ADDRESS-STATE-PROVINCE:
+ADDRESS-POSTALCODE:
+ADDRESS-COUNTRY: United States
+EMAIL: REDEACT@hotmail.com
+OPERATORS: REDACT
+SOAPBOX: Used an indoor fan dipole and 80 Watts.
+QSO: 14000 CW 2023-05-20 1402 REDACT          599     NJ wr5p          599  ben 
+QSO: 14000 CW 2023-05-20 1403 REDACT 		      599     NJ km5g          599  was
+QSO: 14000 CW 2023-05-20 1404 REDACT          599     NJ wa5sog        599  cra 
+QSO: 14000 CW 2023-05-20 1715 REDACT          599     NJ k5cm          599  fau 
+QSO: 14000 CW 2023-05-20 1715 REDACT          599     NJ k5cm          599  per 
+QSO: 14000 CW 2023-05-20 1715 REDACT          599     NJ k5cm          599  pul
+QSO: 21000 CW 2023-05-20 1738 REDACT          599     NJ km5g          599  was 
+QSO: 21000 CW 2023-05-20 1746 REDACT          599     NJ k5cm          599  fau
+QSO: 21000 CW 2023-05-20 1746 REDACT          599     NJ k5cm          599  per
+QSO: 21000 CW 2023-05-20 1746 REDACT          599     NJ k5cm          599  pul
+QSO: 21000 CW 2023-05-20 1747 REDACT          599     NJ wr5p          599  ben 
+QSO: 14000 CW 2023-05-20 1809 REDACT          599     NJ w5yo          599  car 
+QSO: 14000 CW 2023-05-20 1809 REDACT          599     NJ w5yo          599  mad
+QSO: 14000 CW 2023-05-20 1809 REDACT          599     NJ w5yo          599  new
+QSO: 14000 CW 2023-05-20 1847 REDACT          599     NJ k5xk          599  ben
+QSO: 14000 CW 2023-05-20 2001 REDACT          599     NJ k5cm          599  jon
+QSO: 14000 CW 2023-05-20 2001 REDACT          599     NJ k5cm          599  log
+QSO: 14000 CW 2023-05-20 2001 REDACT          599     NJ k5cm          599  pop
+QSO: 14000 CW 2023-05-20 2001 REDACT          599     NJ k5cm          599  yel
+QSO: 14000 CW 2023-05-20 2012 REDACT          599     NJ k9oz          599  pul
+QSO: 7000  CW 2023-05-21 0039 REDACT          599     NJ k9oz          599  pul
+QSO: 7000  CW 2023-05-21 0041 REDACT          599     NJ km5g          599  was
+QSO: 7000  CW 2023-05-21 0044 REDACT          599     NJ wa5sog        599  cra
+QSO: 7000  CW 2023-05-21 0049 REDACT          599     NJ k5cm          599  cra
+QSO: 7000  CW 2023-05-21 0049 REDACT          599     NJ k5cm          599  fra
+QSO: 7000  CW 2023-05-21 0049 REDACT          599     NJ k5cm          599  seb
+END-OF-LOG:
