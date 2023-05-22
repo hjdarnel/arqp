@@ -148,7 +148,7 @@ export default function Submit() {
       .catch((error) => {
         toast.error(
           `Error submitting log. Please contact arkansasqsoparty@gmail.com for help! \n\n${error.message}`,
-          { duration: 10000 }
+          { duration: 15000 }
         );
         console.error(error);
       })

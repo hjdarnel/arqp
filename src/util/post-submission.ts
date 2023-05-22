@@ -12,7 +12,7 @@ export const postSubmission = async (
   })
     .then(responseHandler)
     .catch((error) => {
-      if (error.name === 'AbortError') return;
+      if (ac.signal.aborted) return;
       throw error;
     });
 };
