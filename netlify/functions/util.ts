@@ -47,7 +47,7 @@ export const parse = async (
     logEmail: parsed.EMAIL,
     logOperator:
       parsed['CATEGORY-OPERATOR']?.split('-')[0].toUpperCase() ??
-      parsed['Category-Operator'].split('-')[0].toUpperCase(),
+      parsed['Category-Operator']?.split('-')[0].toUpperCase(),
     logStation:
       parsed['CATEGORY-STATION']?.toUpperCase() ??
       parsed['Category-Station']?.toUpperCase(),
