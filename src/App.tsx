@@ -14,11 +14,13 @@ import { useState, useEffect } from 'react';
 import Submit from './Submit/Submit';
 import Search from './Search/Search';
 import Export from './Export/Export';
-import { Contest } from '@prisma/client';
+import { type Contest } from '@prisma/client';
 import { getActiveContest } from './util/get-active-contest';
+import { getLatestContest } from './util/get-latest-contest';
 
 export default function App() {
   const [currentContest, setCurrentContest] = useState<Contest>();
+  const [latestContest, setLatestContest] = useState<Contest>();
 
   useEffect(() => {
     const ac = new AbortController();
@@ -33,6 +35,23 @@ export default function App() {
       });
     return () => {
       setCurrentContest(undefined);
+      ac.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const ac = new AbortController();
+
+    getLatestContest(ac)
+      .then((response) => {
+        if (ac.signal.aborted) return;
+        setLatestContest(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    return () => {
+      setLatestContest(undefined);
       ac.abort();
     };
   }, []);
@@ -110,7 +129,9 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                {currentContest?.title ?? `Arkansas QSO Party ${new Date().getFullYear()}`}
+                {currentContest?.title ??
+                  latestContest?.title ??
+                  `Arkansas QSO Party ${new Date().getFullYear()}`}
               </Typography>
               <Typography
                 color="inherit"
