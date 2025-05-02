@@ -1,0 +1,84 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "attributePosition": "auto",
+    "bracketSpacing": true
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "include": ["src", "test"],
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "useArrowFunction": "off",
+        "noForEach": "off",
+        "useOptionalChain": "off",
+        "useLiteralKeys": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "off",
+        "useArrayLiterals": "off",
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useBlockStatements": "off",
+        "noUselessElse": "off",
+        "useTemplate": "off",
+        "noUnusedTemplateLiteral": "off",
+        "useNodejsImportProtocol": "off",
+        "useSingleVarDeclarator": "off",
+        "useExponentiationOperator": "off",
+        "useImportType": "off"
+      },
+      "suspicious": {
+        "noDoubleEquals": "warn",
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off",
+        "noAssignInExpressions": "off"
+      }
+    }
+  },
+  "javascript": {
+    "globals": [
+      "jest",
+      "describe",
+      "it",
+      "expect",
+      "beforeEach",
+      "afterEach",
+      "beforeAll",
+      "afterAll",
+      "test",
+      "Express"
+    ],
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "quoteStyle": "single"
+    }
+  }
+}

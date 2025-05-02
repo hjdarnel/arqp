@@ -1,76 +1,76 @@
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Contest {
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  timeStart   DateTime     @default(now())
-  timeEnd     DateTime     @default(now())
-  submissions Submission[]
-  auditLog    AuditLog[]
+    id          String       @id @default(auto()) @map("_id") @db.ObjectId
+    title       String
+    timeStart   DateTime     @default(now())
+    timeEnd     DateTime     @default(now())
+    submissions Submission[]
+    auditLog    AuditLog[]
 
-  @@index([title, timeStart(sort: Desc)])
+    @@index([title, timeStart(sort: Desc)])
 }
 
 model Submission {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  contest           Contest  @relation(fields: [contestId], references: [id])
-  contestId         String   @db.ObjectId
-  callsign          String
-  email             String
-  category          String
-  contestLocation   String
-  multipleOperators Boolean  @default(false)
-  claimedScore      Int      @default(0)
-  name              String?
-  club              String?
-  logScore          Int?
-  logEmail          String?
-  logLocation       String?
-  logOperator       String?
-  logStation        String?
-  logTransmitter    String?
-  logPower          String?
-  logAssisted       Boolean?
-  logBand           String?
-  logMode           String?
-  created_at        DateTime @default(now())
-  logFile           String?
+    id                String   @id @default(auto()) @map("_id") @db.ObjectId
+    contest           Contest  @relation(fields: [contestId], references: [id])
+    contestId         String   @db.ObjectId
+    callsign          String
+    email             String
+    category          String
+    contestLocation   String
+    multipleOperators Boolean  @default(false)
+    claimedScore      Int      @default(0)
+    name              String?
+    club              String?
+    logScore          Int?
+    logEmail          String?
+    logLocation       String?
+    logOperator       String?
+    logStation        String?
+    logTransmitter    String?
+    logPower          String?
+    logAssisted       Boolean?
+    logBand           String?
+    logMode           String?
+    created_at        DateTime @default(now())
+    logFile           String?
 
-  @@unique([callsign, contestId])
-  @@index([callsign, contestId, created_at(sort: Desc)])
+    @@unique([callsign, contestId])
+    @@index([callsign, contestId, created_at(sort: Desc)])
 }
 
 model AuditLog {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  contest           Contest  @relation(fields: [contestId], references: [id])
-  contestId         String   @db.ObjectId
-  callsign          String
-  email             String
-  category          String
-  contestLocation   String
-  multipleOperators Boolean  @default(false)
-  claimedScore      Int      @default(0)
-  name              String?
-  club              String?
-  logScore          Int?
-  logEmail          String?
-  logLocation       String?
-  logOperator       String?
-  logStation        String?
-  logTransmitter    String?
-  logPower          String?
-  logAssisted       Boolean?
-  logBand           String?
-  logMode           String?
-  logFile           String?
-  created_at        DateTime @default(now())
+    id                String   @id @default(auto()) @map("_id") @db.ObjectId
+    contest           Contest  @relation(fields: [contestId], references: [id])
+    contestId         String   @db.ObjectId
+    callsign          String
+    email             String
+    category          String
+    contestLocation   String
+    multipleOperators Boolean  @default(false)
+    claimedScore      Int      @default(0)
+    name              String?
+    club              String?
+    logScore          Int?
+    logEmail          String?
+    logLocation       String?
+    logOperator       String?
+    logStation        String?
+    logTransmitter    String?
+    logPower          String?
+    logAssisted       Boolean?
+    logBand           String?
+    logMode           String?
+    logFile           String?
+    created_at        DateTime @default(now())
 
-  @@index([callsign, contestId, created_at(sort: Desc)])
+    @@index([callsign, contestId, created_at(sort: Desc)])
 }
