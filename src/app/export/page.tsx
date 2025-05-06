@@ -1,7 +1,6 @@
-import { Typography } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import toast from 'react-hot-toast';
@@ -14,7 +13,7 @@ export default async function Page() {
   if (!contests || contests.length === 0) {
     toast.error(
       'Error retrieving contests! Please contact arkansasqsoparty@gmail.com for help.',
-      { duration: 6000 },
+      { duration: 6000 }
     );
   }
 
@@ -25,19 +24,19 @@ export default async function Page() {
         backgroundColor: '#f5f5f5',
         flexGrow: 1,
         height: 'auto',
-        overflow: 'auto',
+        overflow: 'auto'
       }}
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
+        <Grid2 container spacing={3}>
+          <Grid2 size={{ xs: 12, md: 8 }}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 'auto',
+                height: 'auto'
               }}
             >
               <Typography
@@ -59,8 +58,8 @@ export default async function Page() {
                 Select a contest to export the entire result set as a CSV.
               </Typography>
             </Paper>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );

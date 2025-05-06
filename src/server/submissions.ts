@@ -6,7 +6,7 @@ import { db } from './db';
 
 export const getSubmission = async (
   contestId: string,
-  callsign: string,
+  callsign: string
 ): Promise<Submission[] | null> => {
   const alphanum = /^[a-zA-Z0-9]+$/;
 
@@ -23,36 +23,41 @@ export const getSubmission = async (
       contestId,
       callsign: {
         contains: callsign,
-        mode: 'insensitive',
-      },
-    },
+        mode: 'insensitive'
+      }
+    }
   });
 };
 
 export const getLatestContestSubmissions = async ({
   category,
-  location,
+  location
 }: {
   category?: Category;
   location?: Location;
 }) => {
-  const latestContest = await db.contest.findFirst({
-    where: {
-      timeStart: { lt: new Date() },
-    },
-    orderBy: { timeEnd: 'desc' },
-    take: 1,
-  });
+  try {
+    const latestContest = await db.contest.findFirst({
+      where: {
+        timeStart: { lt: new Date() }
+      },
+      orderBy: { timeEnd: 'desc' },
+      take: 1
+    });
 
-  if (!latestContest) {
+    if (!latestContest) {
+      return [];
+    }
+
+    return await db.submission.findMany({
+      where: {
+        contestId: latestContest?.id,
+        category,
+        contestLocation: location
+      }
+    });
+  } catch (err) {
+    console.error('Error fetching latest contest submissions:', err);
     return [];
   }
-
-  return await db.submission.findMany({
-    where: {
-      contestId: latestContest?.id,
-      category,
-      contestLocation: location,
-    },
-  });
 };

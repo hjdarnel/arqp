@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -11,7 +11,7 @@ import Results from '../shared/Results';
 import { SearchForm } from './SearchForm';
 
 export default async function Search({
-  searchParams,
+  searchParams
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
@@ -41,19 +41,19 @@ export default async function Search({
         backgroundColor: '#f5f5f5',
         flexGrow: 1,
         height: 'auto',
-        overflow: 'auto',
+        overflow: 'auto'
       }}
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
+        <Grid2 container spacing={3}>
+          <Grid2 size={{ xs: 12, md: 8 }}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 'auto',
+                height: 'auto'
               }}
             >
               <Typography
@@ -70,17 +70,17 @@ export default async function Search({
                 contestId={contestId ?? contests[0]?.id ?? ''}
               />
             </Paper>
-          </Grid>
+          </Grid2>
 
           {/* Results */}
           {results && (
-            <Grid item sm={12}>
+            <Grid sm={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <Results submissions={results} />
               </Paper>
             </Grid>
           )}
-        </Grid>
+        </Grid2>
       </Container>
     </Box>
   );

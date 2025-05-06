@@ -6,7 +6,7 @@ import {
   Container,
   FormControl,
   FormHelperText,
-  Grid,
+  Grid2,
   InputLabel,
   MenuItem,
   Paper,
@@ -157,8 +157,8 @@ export default function Submit({ contest }: { contest: Contest }) {
               Results will be submitted to current contest ({contest?.title})
             </Typography>
 
-            <Grid container rowSpacing={3} columnSpacing={4}>
-              <Grid item sm={4} md={3}>
+            <Grid2 container rowSpacing={3} columnSpacing={4}>
+              <Grid2 size={{ sm: 4, md: 3 }}>
                 <TextField
                   label="Callsign"
                   helperText="Call Sign Used During Contest"
@@ -168,8 +168,8 @@ export default function Submit({ contest }: { contest: Contest }) {
                   onChange={handleInputChange}
                   name="callsign"
                 />
-              </Grid>
-              <Grid item sm={4} md={3}>
+              </Grid2>
+              <Grid2 size={{ sm: 4, md: 3 }}>
                 <TextField
                   label="Email"
                   helperText="Submitter's E-mail Address"
@@ -180,8 +180,8 @@ export default function Submit({ contest }: { contest: Contest }) {
                   onChange={handleInputChange}
                   name="email"
                 />
-              </Grid>
-              <Grid item sm={8} md={3}>
+              </Grid2>
+              <Grid2 size={{ sm: 8, md: 3 }}>
                 <FormControl variant="filled" required>
                   <TextField
                     slotProps={{
@@ -206,9 +206,9 @@ export default function Submit({ contest }: { contest: Contest }) {
                     </strong>
                   </FormHelperText>
                 </FormControl>
-              </Grid>
-              <Grid item md={1} />
-              <Grid item sm={8} md={3}>
+              </Grid2>
+              <Grid2 size={{ md: 1 }} />
+              <Grid2 size={{ sm: 8, md: 3 }}>
                 <FormControl variant="filled" required fullWidth>
                   <InputLabel id="category-select-label">Category</InputLabel>
                   <Select
@@ -236,8 +236,8 @@ export default function Submit({ contest }: { contest: Contest }) {
                     .
                   </FormHelperText>
                 </FormControl>
-              </Grid>
-              <Grid item sm={8} md={3}>
+              </Grid2>
+              <Grid2 size={{ sm: 8, md: 3 }}>
                 <FormControl variant="filled" required fullWidth>
                   <Autocomplete
                     disablePortal
@@ -262,8 +262,8 @@ export default function Submit({ contest }: { contest: Contest }) {
                     international
                   </FormHelperText>
                 </FormControl>
-              </Grid>
-              <Grid item sm={8} md={3}>
+              </Grid2>
+              <Grid2 size={{ sm: 8, md: 3 }}>
                 <FormControl variant="filled" required fullWidth>
                   <InputLabel id="operators-select-label">Operators</InputLabel>
                   <Select
@@ -283,8 +283,8 @@ export default function Submit({ contest }: { contest: Contest }) {
                     contest?
                   </FormHelperText>
                 </FormControl>
-              </Grid>
-              <Grid item sm={12}>
+              </Grid2>
+              <Grid2 size={{ sm: 12 }}>
                 <label htmlFor="file">
                   <Typography color="text.secondary">
                     Upload Cabrillo log (*.log file extension)
@@ -296,16 +296,16 @@ export default function Submit({ contest }: { contest: Contest }) {
                   name="file"
                   onChange={fileChangeHandler}
                 />
-              </Grid>
-              <Grid item sm={4}>
+              </Grid2>
+              <Grid2 size={{ sm: 4 }}>
                 <SubmitButton />
                 <Link href="/" style={{ textDecoration: 'none' }}>
                   <Button type="submit" variant="outlined" color="secondary">
                     Cancel
                   </Button>
                 </Link>
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           </Paper>
         </form>
       </Container>

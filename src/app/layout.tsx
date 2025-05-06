@@ -28,54 +28,6 @@ export const metadata: Metadata = {
   icons: [{ rel: 'icon', url: '/favicon.svg' }]
 };
 
-export const mainListItems = (includeSubmitLog: boolean) => (
-  <>
-    <ListItemButton component={Link} href="/">
-      <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText
-        sx={{ display: { xs: 'none', md: 'block' } }}
-        primary="Latest Scoreboard"
-      />
-    </ListItemButton>
-    {includeSubmitLog && (
-      <ListItemButton component={Link} href="/submit">
-        <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-          <PublishIcon />
-        </ListItemIcon>
-        <ListItemText
-          sx={{ display: { xs: 'none', md: 'block' } }}
-          primary="Submit Log"
-        />
-      </ListItemButton>
-    )}
-  </>
-);
-
-export const secondaryListItems = (
-  <>
-    <ListItemButton component={Link} href="/search">
-      <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-        <SearchIcon />
-      </ListItemIcon>
-      <ListItemText
-        sx={{ display: { xs: 'none', md: 'block' } }}
-        primary="Search by Call"
-      />
-    </ListItemButton>
-    <ListItemButton component={Link} href="/export">
-      <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-        <DownloadIcon />
-      </ListItemIcon>
-      <ListItemText
-        sx={{ display: { xs: 'none', md: 'block' } }}
-        primary="Export All Results"
-      />
-    </ListItemButton>
-  </>
-);
-
 export default async function RootLayout({
   children
 }: Readonly<{ children: React.ReactNode }>) {
@@ -151,9 +103,45 @@ export default async function RootLayout({
               <Divider />
               <List component="nav" sx={{ flexShrink: 0 }}>
                 <Toolbar />
-                {mainListItems(!!activeContest)}
+                <ListItemButton component={Link} href="/">
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{ display: { xs: 'none', md: 'block' } }}
+                    primary="Latest Scoreboard"
+                  />
+                </ListItemButton>
+                {!!activeContest && (
+                  <ListItemButton component={Link} href="/submit">
+                    <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                      <PublishIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      sx={{ display: { xs: 'none', md: 'block' } }}
+                      primary="Submit Log"
+                    />
+                  </ListItemButton>
+                )}
                 <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
+                <ListItemButton component={Link} href="/search">
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                    <SearchIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{ display: { xs: 'none', md: 'block' } }}
+                    primary="Search by Callsign"
+                  />
+                </ListItemButton>
+                <ListItemButton component={Link} href="/export">
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                    <DownloadIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    sx={{ display: { xs: 'none', md: 'block' } }}
+                    primary="Export All Results"
+                  />
+                </ListItemButton>
                 <Copyright />
               </List>
               <Box

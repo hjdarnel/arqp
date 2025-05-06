@@ -16,9 +16,8 @@ View the contest rules/more information at https://arkqp.com
 
 ## Developing
 
-- Github Codespaces are supported
-- Copy `.env.example` to `.env` and replace database username/password (or use a local connection string)
-- `docker-compose up -d` to start the database, then `docker-compose exec mongo` then `mongo` then `rs.initiate({_id: "rs0", members: [{_id: 0, host: "127.0.0.1:27017"}] })` to setup replicaset
+- Copy `.env.example` to `.env` and replace database username/password (using replicaset or direct connection to a testing db)
+- `rs.initiate({_id: "rs0", members: [{_id: 0, host: "127.0.0.1:27017"}] })` to setup replicaset if brand-new
 - `npm install` and `npm run dev` to build in dev mode.
 
 ## Copyright

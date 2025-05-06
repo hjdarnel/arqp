@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
+import { Box, Container, Grid2, Paper, Toolbar } from '@mui/material';
 import { getLatestContestSubmissions } from '~/server/submissions';
 import type { Category } from '~/util/categories';
 import type { Location } from '~/util/locations';
@@ -7,7 +7,7 @@ import Chart from './Chart';
 import Overview from './Overview';
 
 export default async function Scoreboard({
-  searchParams,
+  searchParams
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
@@ -22,39 +22,31 @@ export default async function Scoreboard({
   const submissions = await getLatestContestSubmissions({ category, location });
 
   return (
-    <Box
-      component="main"
-      sx={{
-        backgroundColor: '#f5f5f5',
-        flexGrow: 1,
-        height: 'auto',
-        overflow: 'auto',
-      }}
-    >
+    <Box height={'--calc(100vh - 300px)'}>
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
+        <Grid2 container spacing={3}>
           {/* Chart */}
-          <Grid item xs={12} sm={12} md={7} lg={8}>
+          <Grid2 size={{ xs: 12, sm: 12, md: 7, lg: 8 }}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 340,
+                height: 340
               }}
             >
               <Chart submissions={submissions} />
             </Paper>
-          </Grid>
+          </Grid2>
           {/* Overview */}
-          <Grid item xs={12} sm={12} md={5} lg={4}>
+          <Grid2 size={{ xs: 12, sm: 12, md: 5, lg: 4 }}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: 340,
+                minHeight: 340
               }}
             >
               <Overview
@@ -63,14 +55,14 @@ export default async function Scoreboard({
                 location={location}
               />
             </Paper>
-          </Grid>
+          </Grid2>
           {/* Results */}
-          <Grid item xs={12} sm={12}>
-            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+          <Grid2 size={{ xs: 12, sm: 12 }}>
+            <Paper sx={{ p: 2 }}>
               <Results submissions={submissions} />
             </Paper>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );
