@@ -51,7 +51,7 @@ export default function Results({
         sx={{
           width: '100%',
           // magic numbers
-          maxHeight,
+          maxHeight: { md: 'auto', xl: maxHeight },
           display: 'flex',
           flexDirection: 'column'
         }}

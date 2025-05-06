@@ -2,13 +2,12 @@ import Typography from '@mui/material/Typography';
 import type { Submission } from '@prisma/client';
 import Title from '../shared/Title';
 
-import { Box } from '@mui/material';
 import { Filter } from './Filter';
 
 export default function Overview({
   submissions,
   category,
-  location,
+  location
 }: {
   submissions: Submission[];
   category: string | undefined;
@@ -20,11 +19,11 @@ export default function Overview({
         return current.claimedScore > acc.claimedScore
           ? {
               claimedScore: current.claimedScore,
-              callsign: current.callsign,
+              callsign: current.callsign
             }
           : acc;
       },
-      { claimedScore: 0, callsign: '' },
+      { claimedScore: 0, callsign: '' }
     );
 
     return (
@@ -58,7 +57,7 @@ export default function Overview({
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Total Submissions
       </Typography>
-      <Box>{renderHighscore(submissions)}</Box>
+      <span>{renderHighscore(submissions)}</span>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         High Score
       </Typography>
@@ -66,7 +65,7 @@ export default function Overview({
         {submissions.length
           ? Math.round(
               submissions.reduce((a, b) => a + b.claimedScore, 0) /
-                submissions.length,
+                submissions.length
             )
           : 0}
       </Typography>

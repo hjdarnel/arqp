@@ -1,7 +1,7 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DownloadIcon from '@mui/icons-material/Download';
-import PublishIcon from '@mui/icons-material/Publish';
 import SearchIcon from '@mui/icons-material/Search';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {
   AppBar,
   Box,
@@ -104,7 +104,7 @@ export default async function RootLayout({
               <List component="nav" sx={{ flexShrink: 0 }}>
                 <Toolbar />
                 <ListItemButton component={Link} href="/">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
                     <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText
@@ -114,8 +114,8 @@ export default async function RootLayout({
                 </ListItemButton>
                 {!!activeContest && (
                   <ListItemButton component={Link} href="/submit">
-                    <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-                      <PublishIcon />
+                    <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
+                      <CloudUploadIcon />
                     </ListItemIcon>
                     <ListItemText
                       sx={{ display: { xs: 'none', md: 'block' } }}
@@ -125,7 +125,7 @@ export default async function RootLayout({
                 )}
                 <Divider sx={{ my: 1 }} />
                 <ListItemButton component={Link} href="/search">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
                     <SearchIcon />
                   </ListItemIcon>
                   <ListItemText
@@ -134,7 +134,7 @@ export default async function RootLayout({
                   />
                 </ListItemButton>
                 <ListItemButton component={Link} href="/export">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
+                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
                     <DownloadIcon />
                   </ListItemIcon>
                   <ListItemText
