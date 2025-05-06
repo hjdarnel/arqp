@@ -1,6 +1,9 @@
 'use server';
-
-import AWS from 'aws-sdk';
+import {
+  PutObjectCommand,
+  type PutObjectCommandInput,
+  S3
+} from '@aws-sdk/client-s3';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { env } from '~/env';
@@ -9,9 +12,12 @@ import { Location } from '~/util/locations';
 import { db } from './db';
 import { parse } from './parse';
 
-const s3 = new AWS.S3({
-  accessKeyId: env.AWS_S3_ACCESS_KEY_ID,
-  secretAccessKey: env.AWS_S3_SECRET_ACCESS_KEY
+const s3 = new S3({
+  region: 'us-east-2',
+  credentials: {
+    accessKeyId: env.AWS_S3_ACCESS_KEY_ID,
+    secretAccessKey: env.AWS_S3_SECRET_ACCESS_KEY
+  }
 });
 
 export type FormResponse =
@@ -65,19 +71,19 @@ export const submitSubmission = async (unsafeSubmission: unknown) => {
 
   const data = await parse(validated.data, currentContest);
 
-  const uploaded = await s3
-    .upload({
-      Bucket: env.AWS_S3_BUCKET_NAME,
-      Key: `${currentContest.title.replace(/\s/g, '_')}/${
-        validated.data.callsign
-      }-${Date.now()}-${validated.data.file.name}`,
-      Body: Buffer.from(await validated.data.file.arrayBuffer()),
-      ACL: 'public-read'
-    })
-    .promise();
-  data.logFile = uploaded.Location;
+  const params = {
+    Bucket: env.AWS_S3_BUCKET_NAME,
+    Key: `${currentContest.title.replace(/\s/g, '_')}/${
+      validated.data.callsign
+    }-${Date.now()}-${validated.data.file.name}`,
+    Body: Buffer.from(await validated.data.file.arrayBuffer()),
+    ACL: 'public-read'
+  } as PutObjectCommandInput;
 
-  console.log(uploaded.Location);
+  await s3.send(new PutObjectCommand(params));
+  const location = `https://${params.Bucket}.s3.us-east-2.amazonaws.com/${params.Key}`;
+
+  data.logFile = location;
   await db.auditLog.create({ data });
   await db.submission.upsert({
     create: data,

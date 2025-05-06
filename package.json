@@ -21,6 +21,7 @@
     "db:migrate": "prisma migrate deploy"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.804.0",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
@@ -33,7 +34,6 @@
     "@prisma/client": "^5.14.0",
     "@sentry/nextjs": "^9.15.0",
     "@t3-oss/env-nextjs": "^0.10.1",
-    "aws-sdk": "^2.1692.0",
     "cabrillo": "^0.1.0",
     "geist": "^1.3.0",
     "install": "^0.13.0",
