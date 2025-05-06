@@ -1,6 +1,7 @@
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import type { Submission } from '@prisma/client';
 import Title from './Title';
+import { Box } from '@mui/material';
 
 const columns: GridColDef[] = [
   { field: 'callsign', headerName: 'Callsign', width: 90 },
@@ -37,14 +38,24 @@ const columns: GridColDef[] = [
 ];
 
 export default function Results({
-  submissions
+  submissions,
+  maxHeight
 }: {
   submissions: Submission[];
+  maxHeight: string;
 }) {
   return (
     <>
       <Title>Results</Title>
-      <div style={{ width: '100%' }}>
+      <Box
+        sx={{
+          width: '100%',
+          // magic numbers
+          maxHeight,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         <DataGrid
           rows={submissions}
           columns={columns}
@@ -54,7 +65,7 @@ export default function Results({
             }
           }}
         />
-      </div>
+      </Box>
     </>
   );
 }

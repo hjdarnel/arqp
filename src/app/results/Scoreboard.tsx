@@ -1,4 +1,4 @@
-import { Box, Container, Grid2, Paper, Toolbar } from '@mui/material';
+import { Container, Grid2, Paper, Toolbar } from '@mui/material';
 import { getLatestContestSubmissions } from '~/server/submissions';
 import type { Category } from '~/util/categories';
 import type { Location } from '~/util/locations';
@@ -22,9 +22,9 @@ export default async function Scoreboard({
   const submissions = await getLatestContestSubmissions({ category, location });
 
   return (
-    <Box height={'--calc(100vh - 300px)'}>
+    <>
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Grid2 container spacing={3}>
           {/* Chart */}
           <Grid2 size={{ xs: 12, sm: 12, md: 7, lg: 8 }}>
@@ -59,11 +59,14 @@ export default async function Scoreboard({
           {/* Results */}
           <Grid2 size={{ xs: 12, sm: 12 }}>
             <Paper sx={{ p: 2 }}>
-              <Results submissions={submissions} />
+              <Results
+                submissions={submissions}
+                maxHeight="calc(100vh - 550px)"
+              />
             </Paper>
           </Grid2>
         </Grid2>
       </Container>
-    </Box>
+    </>
   );
 }

@@ -6,7 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
+  TextField
 } from '@mui/material';
 import type { Contest } from '@prisma/client';
 import { redirect } from 'next/navigation';
@@ -16,7 +16,7 @@ import useAnalyticsEventTracker from '~/util/analytics';
 export const SearchForm = ({
   contests,
   callsign,
-  contestId,
+  contestId
 }: {
   contests: Contest[];
   callsign: string | undefined;
@@ -42,7 +42,7 @@ export const SearchForm = ({
         if (callsignValue && contestIdValue) {
           redirect(
             // eslint-disable-next-line @typescript-eslint/no-base-to-string
-            `/search?callsign=${callsignValue.toString()}&contestId=${contestIdValue.toString()}`,
+            `/search?callsign=${callsignValue.toString()}&contestId=${contestIdValue.toString()}`
           );
         }
       }}
@@ -51,7 +51,7 @@ export const SearchForm = ({
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: 2,
+          gap: 2
         }}
       >
         <TextField

@@ -171,7 +171,7 @@ const Copyright = () => {
         position: 'absolute',
         width: '100%',
         bottom: 0,
-        py: 2,
+        pb: 2,
         px: { xs: '0', sm: '2' }
       }}
     >
@@ -181,9 +181,9 @@ const Copyright = () => {
         align="center"
         sx={{ fontSize: { xs: '10px', md: '14px' } }}
       >
-        {'Copyright © '}
-        <br />
-        <Link href="https://github.com/hjdarnel/arqp">Henry Darnell</Link>{' '}
+        <Link href="https://github.com/hjdarnel/arqp">
+          &copy;&nbsp;Henry Darnell
+        </Link>{' '}
         {new Date().getFullYear()}
       </Typography>
     </Box>

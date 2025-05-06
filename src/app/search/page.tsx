@@ -1,7 +1,6 @@
 import { Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import type { Submission } from '@prisma/client';
@@ -35,15 +34,7 @@ export default async function Search({
   const contests = await getAllContests();
 
   return (
-    <Box
-      component="main"
-      sx={{
-        backgroundColor: '#f5f5f5',
-        flexGrow: 1,
-        height: 'auto',
-        overflow: 'auto'
-      }}
-    >
+    <Box component="main">
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid2 container spacing={3}>
@@ -74,11 +65,14 @@ export default async function Search({
 
           {/* Results */}
           {results && (
-            <Grid sm={12}>
+            <Grid2 size={{ sm: 12 }}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <Results submissions={results} />
+                <Results
+                  submissions={results}
+                  maxHeight="calc(100vh - 400px)"
+                />
               </Paper>
-            </Grid>
+            </Grid2>
           )}
         </Grid2>
       </Container>

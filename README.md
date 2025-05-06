@@ -22,4 +22,4 @@ View the contest rules/more information at https://arkqp.com
 
 ## Copyright
 
-All Rights Reserved. Copyright © 2022 [Henry Darnell](https://darnell.io/)
+All Rights Reserved. Copyright © 2025 [Henry Darnell](https://darnell.io/)
