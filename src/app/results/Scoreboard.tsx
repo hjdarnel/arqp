@@ -24,7 +24,7 @@ export default async function Scoreboard({
   return (
     <>
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 2 }}>
         <Grid2 container spacing={3}>
           {/* Chart */}
           <Grid2 size={{ xs: 12, sm: 12, md: 7, lg: 8 }}>

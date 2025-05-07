@@ -36,7 +36,7 @@ export default async function Search({
   return (
     <Box component="main">
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 2 }}>
         <Grid2 container spacing={3}>
           <Grid2 size={{ xs: 12, md: 8 }}>
             <Paper
