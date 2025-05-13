@@ -20,8 +20,7 @@ import { getLatestContest } from './util/get-latest-contest';
 
 export default function App() {
   const [currentContest, setCurrentContest] = useState<Contest>();
-  const [latestContest, setLatestContest] = useState<Contest>();
-
+  
   useEffect(() => {
     const ac = new AbortController();
 
@@ -39,24 +38,7 @@ export default function App() {
     };
   }, []);
 
-  useEffect(() => {
-    const ac = new AbortController();
-
-    getLatestContest(ac)
-      .then((response) => {
-        if (ac.signal.aborted) return;
-        setLatestContest(response);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    return () => {
-      setLatestContest(undefined);
-      ac.abort();
-    };
-  }, []);
-
-  const Copyright = (props: any) => {
+   const Copyright = (props: any) => {
     return (
       <Box
         sx={{
@@ -129,7 +111,7 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                {`Arkansas QSO Party ${new Date().getFullYear()}`}
+                {currentContest?.title ?? `Arkansas QSO Party ${new Date().getFullYear()}`}
               </Typography>
               <Typography
                 color="inherit"
