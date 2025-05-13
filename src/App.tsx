@@ -129,9 +129,7 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                {currentContest?.title ??
-                  latestContest?.title ??
-                  `Arkansas QSO Party ${new Date().getFullYear()}`}
+                {`Arkansas QSO Party ${new Date().getFullYear()}`}
               </Typography>
               <Typography
                 color="inherit"
