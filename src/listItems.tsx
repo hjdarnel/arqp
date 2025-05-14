@@ -23,7 +23,7 @@ export const mainListItems = ({
         primary="Latest Scoreboard"
       />
     </ListItemButton>
-    {excludeSubmitLog && (
+    {!excludeSubmitLog && (
       <ListItemButton component={Link} to="/submit">
         <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
           <PublishIcon />
