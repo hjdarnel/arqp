@@ -64,13 +64,13 @@ export default function CustomTooltipContent({
     });
 
     return (
-      <React.Fragment>
+      <>
         <div style={finalStyle}>
           <ul className="recharts-tooltip-item-list" style={listStyle}>
             {items}
           </ul>
         </div>
-      </React.Fragment>
+      </>
     );
   }
   return null;

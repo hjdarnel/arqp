@@ -43,7 +43,7 @@ export default function Results({
   submissions: Submission[];
 }) {
   return (
-    <React.Fragment>
+    <>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Results
       </Typography>
@@ -55,6 +55,6 @@ export default function Results({
           disableSelectionOnClick
         />
       </div>
-    </React.Fragment>
+    </>
   );
 }

@@ -22,7 +22,6 @@ export default function Export() {
   const [allContests, setAllContests] = useState<Contest[]>();
   const [selectedContest, setSelectedContest] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [password, setPassword] = useState<string>();
   const gaEventTracker = useAnalyticsEventTracker();
 
   const mapContests = () => {
@@ -39,12 +38,10 @@ export default function Export() {
   const fetchResults = (e: any) => {
     e.preventDefault();
     gaEventTracker('export all results');
-    if (!password) return;
     location.assign(
       '/api/export-contest?' +
         new URLSearchParams({
-          contestId: selectedContest,
-          password
+          contestId: selectedContest
         })
     );
   };
@@ -136,16 +133,6 @@ export default function Export() {
                     >
                       {mapContests()}
                     </Select>
-                  </FormControl>
-                  <FormControl>
-                    <TextField
-                      required
-                      label="Password"
-                      helperText=""
-                      name="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
                   </FormControl>
                   <Button
                     sx={{ height: '56px' }}

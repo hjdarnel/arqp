@@ -21,6 +21,7 @@ export type ResultsFilter = {
 
 export default function Scoreboard() {
   const [results, setResults] = useState<Submission[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [filteredResults, setFilteredResults] = useState<Submission[]>([]);
 
   const updateFilteredResults = ({ category, location }: ResultsFilter) => {
@@ -55,6 +56,9 @@ export default function Scoreboard() {
           `Error retrieving the current results! Please contact arkansasqsoparty@gmail.com for help. \n\n${err}`,
           { duration: 6000 }
         );
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     return () => {
@@ -104,6 +108,7 @@ export default function Scoreboard() {
               }}
             >
               <Overview
+                isLoading={isLoading}
                 submissions={filteredResults || []}
                 updateFilteredResults={updateFilteredResults}
               />
@@ -112,7 +117,7 @@ export default function Scoreboard() {
           {/* Results */}
           <Grid item xs={12} sm={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Results submissions={filteredResults} />
+              <Results isLoading={isLoading} submissions={filteredResults} />
             </Paper>
           </Grid>
         </Grid>

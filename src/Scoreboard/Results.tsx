@@ -38,21 +38,24 @@ const columns: GridColDef[] = [
 ];
 
 export default function Results({
-  submissions
+  submissions,
+  isLoading
 }: {
   submissions: Submission[];
+  isLoading: boolean;
 }) {
   return (
-    <React.Fragment>
+    <>
       <Title>Results</Title>
       <div style={{ height: '400px', width: '100%' }}>
         <DataGrid
+          loading={isLoading}
           rows={submissions}
           columns={columns}
           pageSize={25}
           disableSelectionOnClick
         />
       </div>
-    </React.Fragment>
+    </>
   );
 }

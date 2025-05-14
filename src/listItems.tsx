@@ -8,8 +8,12 @@ import PublishIcon from '@mui/icons-material/Publish';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Link } from 'react-router-dom';
 
-export const mainListItems = (includeSubmitLog: boolean) => (
-  <React.Fragment>
+export const mainListItems = ({
+  excludeSubmitLog
+}: {
+  excludeSubmitLog: boolean;
+}) => (
+  <>
     <ListItemButton component={Link} to="/">
       <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
         <DashboardIcon />
@@ -19,7 +23,7 @@ export const mainListItems = (includeSubmitLog: boolean) => (
         primary="Latest Scoreboard"
       />
     </ListItemButton>
-    {includeSubmitLog && (
+    {excludeSubmitLog && (
       <ListItemButton component={Link} to="/submit">
         <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
           <PublishIcon />
@@ -30,11 +34,11 @@ export const mainListItems = (includeSubmitLog: boolean) => (
         />
       </ListItemButton>
     )}
-  </React.Fragment>
+  </>
 );
 
 export const secondaryListItems = (
-  <React.Fragment>
+  <>
     <ListItemButton component={Link} to="/search">
       <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
         <SearchIcon />
@@ -53,5 +57,5 @@ export const secondaryListItems = (
         primary="Export All Results"
       />
     </ListItemButton>
-  </React.Fragment>
+  </>
 );

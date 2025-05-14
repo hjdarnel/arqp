@@ -25,7 +25,7 @@ View the contest rules/more information at https://arkqp.com
 - Github Codespaces are supported
 - Copy `.env.example` to `.env` and replace database username/password (or use a local connection string)
 - `docker-compose up -d` to start the database, then `docker-compose exec mongo` then `mongo` then `rs.initiate({_id: "rs0", members: [{_id: 0, host: "127.0.0.1:27017"}] })` to setup replicaset
-- `npm install` and `npx netlify dev` to build in dev mode, including backend functions
+- `npm install` and `npx netlify-cli dev` to build in dev mode, including backend functions
 
 ## Copyright
 

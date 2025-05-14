@@ -16,11 +16,10 @@ import Search from './Search/Search';
 import Export from './Export/Export';
 import { type Contest } from '@prisma/client';
 import { getActiveContest } from './util/get-active-contest';
-import { getLatestContest } from './util/get-latest-contest';
 
 export default function App() {
   const [currentContest, setCurrentContest] = useState<Contest>();
-  
+
   useEffect(() => {
     const ac = new AbortController();
 
@@ -38,7 +37,7 @@ export default function App() {
     };
   }, []);
 
-   const Copyright = (props: any) => {
+  const Copyright = (props: any) => {
     return (
       <Box
         sx={{
@@ -111,7 +110,8 @@ export default function App() {
                 sx={{ textDecoration: 'none', cursor: 'pointer' }}
                 onClick={() => navigate('/')}
               >
-                {currentContest?.title ?? `Arkansas QSO Party ${new Date().getFullYear()}`}
+                {currentContest?.title ??
+                  `Arkansas QSO Party ${new Date().getFullYear()}`}
               </Typography>
               <Typography
                 color="inherit"
@@ -130,7 +130,7 @@ export default function App() {
           <Divider />
           <List component="nav" sx={{ flexShrink: 0 }}>
             <Toolbar />
-            {mainListItems(!!currentContest)}
+            {mainListItems({ excludeSubmitLog: !currentContest })}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
             <Copyright />

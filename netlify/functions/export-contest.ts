@@ -10,19 +10,6 @@ const handler: Handler = async (event, context) => {
 
     if (!contestId) throw new Error('Missing required parameter contestId');
 
-    const password = event.queryStringParameters?.['password'];
-
-    if (!password) throw new Error('Missing required parameter password');
-    if (password !== process.env.ADMIN_PASSWORD)
-      return {
-        statusCode: 403,
-        body: JSON.stringify({
-          error: {
-            message: 'Permission denied: incorrect password'
-          }
-        })
-      };
-
     const contest = await prisma.contest.findUnique({
       where: { id: event.queryStringParameters?.['contestId'] }
     });

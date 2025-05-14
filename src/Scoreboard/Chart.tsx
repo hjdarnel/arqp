@@ -43,7 +43,7 @@ const calculateTicks = (submissions: Submission[]): number[] => {
 
 export default function Chart({ submissions }: { submissions: Submission[] }) {
   return (
-    <React.Fragment>
+    <>
       <Title>Scores</Title>
       <ResponsiveContainer>
         <ScatterChart width={730} height={250}>
@@ -67,6 +67,6 @@ export default function Chart({ submissions }: { submissions: Submission[] }) {
           <Scatter data={formatSubmissions(submissions)} fill="#448AFF" />
         </ScatterChart>
       </ResponsiveContainer>
-    </React.Fragment>
+    </>
   );
 }

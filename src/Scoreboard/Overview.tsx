@@ -10,10 +10,12 @@ import { ResultsFilter } from './Scoreboard';
 
 export default function Overview({
   submissions,
-  updateFilteredResults
+  updateFilteredResults,
+  isLoading
 }: {
   submissions: Submission[];
   updateFilteredResults: ({ category, location }: ResultsFilter) => void;
+  isLoading: boolean;
 }) {
   const [category, setCategory] = useState<'All Categories' | Category>(
     'All Categories'
@@ -48,15 +50,23 @@ export default function Overview({
     );
 
     return (
-      <React.Fragment>
-        <Typography component="p" variant="h4" sx={{ display: 'inline' }}>
-          {highScore.claimedScore}
+      <>
+        <Typography
+          component="p"
+          variant="h4"
+          sx={{ display: 'inline', color: isLoading ? 'gray' : undefined }}
+        >
+          {highScore.claimedScore || <>&mdash;</>}
         </Typography>
         {highScore.callsign && (
           <Typography
             component="p"
             variant="h4"
-            sx={{ mx: 1, display: 'inline', fontWeight: 200 }}
+            sx={{
+              mx: 1,
+              display: 'inline',
+              fontWeight: 200
+            }}
           >
             &ndash;
           </Typography>
@@ -64,12 +74,12 @@ export default function Overview({
         <Typography component="p" variant="h4" sx={{ display: 'inline' }}>
           {highScore.callsign}
         </Typography>
-      </React.Fragment>
+      </>
     );
   };
 
   return (
-    <React.Fragment>
+    <>
       <Title>Overview</Title>
       <Box
         sx={{
@@ -125,8 +135,12 @@ export default function Overview({
           </Select>
         </FormControl>
       </Box>
-      <Typography component="p" variant="h4">
-        {submissions.length}
+      <Typography
+        component="p"
+        variant="h4"
+        sx={{ color: isLoading ? 'gray' : undefined }}
+      >
+        {submissions.length || <>&mdash;</>}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Total Submissions
@@ -135,17 +149,23 @@ export default function Overview({
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         High Score
       </Typography>
-      <Typography component="p" variant="h4">
-        {submissions.length
-          ? Math.round(
-              submissions.reduce((a, b) => a + b.claimedScore, 0) /
-                submissions.length
-            )
-          : 0}
+      <Typography
+        component="p"
+        variant="h4"
+        sx={{ color: isLoading ? 'gray' : undefined }}
+      >
+        {submissions.length ? (
+          Math.round(
+            submissions.reduce((a, b) => a + b.claimedScore, 0) /
+              submissions.length
+          )
+        ) : (
+          <>&mdash;</>
+        )}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         Average Score
       </Typography>
-    </React.Fragment>
+    </>
   );
 }
