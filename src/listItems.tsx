@@ -4,9 +4,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SearchIcon from '@mui/icons-material/Search';
-import PublishIcon from '@mui/icons-material/Publish';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Link } from 'react-router-dom';
+import { CloudUpload } from '@mui/icons-material';
 
 export const mainListItems = ({
   excludeSubmitLog
@@ -26,7 +26,7 @@ export const mainListItems = ({
     {!excludeSubmitLog && (
       <ListItemButton component={Link} to="/submit">
         <ListItemIcon sx={{ minWidth: { xs: '26px', md: '65px' } }}>
-          <PublishIcon />
+          <CloudUpload />
         </ListItemIcon>
         <ListItemText
           sx={{ display: { xs: 'none', md: 'block' } }}
