@@ -2,7 +2,6 @@ import { Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Toolbar from '@mui/material/Toolbar';
 import toast from 'react-hot-toast';
 import { getAllContests } from '~/server/contests';
 import ExportForm from './ExportForm';
@@ -21,22 +20,17 @@ export default async function Page() {
     <Box
       component="main"
       sx={{
-        backgroundColor: '#f5f5f5',
-        flexGrow: 1,
-        height: 'auto',
-        overflow: 'auto'
+        backgroundColor: '#f5f5f5'
       }}
     >
-      <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container>
         <Grid2 container spacing={3}>
           <Grid2 size={{ xs: 12, md: 8 }}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
-                flexDirection: 'column',
-                height: 'auto'
+                flexDirection: 'column'
               }}
             >
               <Typography

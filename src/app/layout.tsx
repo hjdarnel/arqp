@@ -62,9 +62,9 @@ export default async function RootLayout({
       <body>
         <ThemeProvider theme={theme}>
           <AppRouterCacheProvider>
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ height: '100dvh' }}>
               <CssBaseline />
-              <AppBar position="absolute" sx={{ height: '4rem' }}>
+              <AppBar position="relative">
                 <Toolbar
                   sx={{
                     display: 'flex',
@@ -100,63 +100,68 @@ export default async function RootLayout({
                   </Link>
                 </Toolbar>
               </AppBar>
-              <Divider />
-              <List component="nav" sx={{ flexShrink: 0 }}>
-                <Toolbar />
-                <ListItemButton component={Link} href="/">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    sx={{ display: { xs: 'none', md: 'block' } }}
-                    primary="Latest Scoreboard"
-                  />
-                </ListItemButton>
-                {!!activeContest && (
-                  <ListItemButton component={Link} href="/submit">
+              <Box sx={{ display: 'flex' }}>
+                <List component="nav">
+                  <ListItemButton component={Link} href="/">
                     <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
-                      <CloudUploadIcon />
+                      <DashboardIcon />
                     </ListItemIcon>
                     <ListItemText
                       sx={{ display: { xs: 'none', md: 'block' } }}
-                      primary="Submit Log"
+                      primary="Latest Scoreboard"
                     />
                   </ListItemButton>
-                )}
-                <Divider sx={{ my: 1 }} />
-                <ListItemButton component={Link} href="/search">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
-                    <SearchIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    sx={{ display: { xs: 'none', md: 'block' } }}
-                    primary="Search by Callsign"
-                  />
-                </ListItemButton>
-                <ListItemButton component={Link} href="/export">
-                  <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
-                    <DownloadIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    sx={{ display: { xs: 'none', md: 'block' } }}
-                    primary="Export All Results"
-                  />
-                </ListItemButton>
-                <Copyright />
-              </List>
-              <Box
-                component="main"
-                sx={{
-                  backgroundColor: '#f5f5f5',
-                  flexGrow: 1,
-                  height: '100vh',
-                  overflow: 'auto'
-                }}
-              >
-                {children}
+                  {!!activeContest && (
+                    <ListItemButton component={Link} href="/submit">
+                      <ListItemIcon
+                        sx={{ minWidth: { xs: '26px', md: '46px' } }}
+                      >
+                        <CloudUploadIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        sx={{ display: { xs: 'none', md: 'block' } }}
+                        primary="Submit Log"
+                      />
+                    </ListItemButton>
+                  )}
+                  <Divider sx={{ my: 1 }} />
+                  <ListItemButton component={Link} href="/search">
+                    <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
+                      <SearchIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      sx={{ display: { xs: 'none', md: 'block' } }}
+                      primary="Search by Callsign"
+                    />
+                  </ListItemButton>
+                  <ListItemButton component={Link} href="/export">
+                    <ListItemIcon sx={{ minWidth: { xs: '26px', md: '46px' } }}>
+                      <DownloadIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      sx={{ display: { xs: 'none', md: 'block' } }}
+                      primary="Export All Results"
+                    />
+                  </ListItemButton>
+                  <Copyright />
+                </List>
+                <Box
+                  component="main"
+                  sx={{
+                    backgroundColor: '#f5f5f5',
+                    flexGrow: 1,
+                    height: '100%',
+                    minHeight: '94dvh',
+                    overflow: 'auto',
+                    pt: 4,
+                    pb: 2
+                  }}
+                >
+                  {children}
+                </Box>
               </Box>
+              <Toaster />
             </Box>
-            <Toaster />
           </AppRouterCacheProvider>
         </ThemeProvider>
       </body>
@@ -172,7 +177,7 @@ const Copyright = () => {
         width: '100%',
         bottom: 0,
         pb: 2,
-        px: { xs: '0', sm: '2' }
+        px: { xs: 0, sm: 2 }
       }}
     >
       <Typography

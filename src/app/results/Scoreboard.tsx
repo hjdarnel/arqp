@@ -1,4 +1,4 @@
-import { Container, Grid2, Paper, Toolbar } from '@mui/material';
+import { Container, Grid2, Paper } from '@mui/material';
 import { getLatestContestSubmissions } from '~/server/submissions';
 import type { Category } from '~/util/categories';
 import type { Location } from '~/util/locations';
@@ -23,8 +23,7 @@ export default async function Scoreboard({
 
   return (
     <>
-      <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 2 }}>
+      <Container maxWidth="lg">
         <Grid2 container spacing={3}>
           {/* Chart */}
           <Grid2 size={{ xs: 12, sm: 12, md: 7, lg: 8 }}>
@@ -45,8 +44,7 @@ export default async function Scoreboard({
               sx={{
                 p: 2,
                 display: 'flex',
-                flexDirection: 'column',
-                minHeight: 340
+                flexDirection: 'column'
               }}
             >
               <Overview

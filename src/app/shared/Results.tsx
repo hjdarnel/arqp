@@ -42,7 +42,7 @@ export default function Results({
   maxHeight
 }: {
   submissions: Submission[];
-  maxHeight: string;
+  maxHeight?: string;
 }) {
   return (
     <>
