@@ -5,8 +5,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  type SelectChangeEvent,
-  TextField,
+  type SelectChangeEvent
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import type { Contest } from '@prisma/client';
@@ -15,9 +14,8 @@ import useAnalyticsEventTracker from '~/util/analytics';
 
 export default function ExportForm({ contests }: { contests: Contest[] }) {
   const [selectedContest, setSelectedContest] = useState<string>(
-    contests[0] ? contests[0].id : '',
+    contests[0] ? contests[0].id : ''
   );
-  const [password, setPassword] = useState<string>('');
   const gaEventTracker = useAnalyticsEventTracker();
 
   const mapContests = () => {
@@ -40,9 +38,8 @@ export default function ExportForm({ contests }: { contests: Contest[] }) {
     gaEventTracker('export all results');
     location.assign(
       `/api/export-contest?${new URLSearchParams({
-        contestId: selectedContest,
-        password,
-      })}`,
+        contestId: selectedContest
+      })}`
     );
   };
 
@@ -52,7 +49,7 @@ export default function ExportForm({ contests }: { contests: Contest[] }) {
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: 2,
+          gap: 2
         }}
       >
         <FormControl>
@@ -68,16 +65,6 @@ export default function ExportForm({ contests }: { contests: Contest[] }) {
           >
             {mapContests()}
           </Select>
-        </FormControl>
-        <FormControl>
-          <TextField
-            required
-            label="Password"
-            helperText=""
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
         </FormControl>
         <Button
           sx={{ height: '56px' }}

@@ -15,16 +15,6 @@ export default async function handler(
   if (typeof contestId !== 'string')
     throw new Error('Missing required parameter contestId');
 
-  const { password } = req.query;
-
-  if (typeof password !== 'string')
-    throw new Error('Missing required parameter password');
-
-  if (password !== process.env.ADMIN_PASSWORD) {
-    res.status(403).json({ message: 'Permission denied: incorrect password' });
-    return;
-  }
-
   const contest = await db.contest.findUnique({
     where: { id: contestId }
   });

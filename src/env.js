@@ -11,7 +11,6 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
-    ADMIN_PASSWORD: z.string().default('testing'),
     AWS_S3_BUCKET_NAME: z.string(),
     AWS_S3_SECRET_ACCESS_KEY: z.string(),
     AWS_S3_ACCESS_KEY_ID: z.string()
@@ -33,7 +32,6 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
-    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
     AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
     AWS_S3_SECRET_ACCESS_KEY: process.env.AWS_S3_SECRET_ACCESS_KEY,
     AWS_S3_ACCESS_KEY_ID: process.env.AWS_S3_ACCESS_KEY_ID,
