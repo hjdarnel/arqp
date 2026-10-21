@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react';
 import Submit from './Submit/Submit';
 import Search from './Search/Search';
 import Export from './Export/Export';
+import Admin from './Admin/Admin';
 import { type Contest } from '@prisma/client';
 import { getActiveContest } from './util/get-active-contest';
 
@@ -151,6 +152,7 @@ export default function App() {
               <Route path="/submit" element={<Submit />}></Route>
               <Route path="/search" element={<Search />}></Route>
               <Route path="/export" element={<Export />}></Route>
+              <Route path="/admin" element={<Admin />}></Route>
               <Route path="/" element={<Scoreboard />}></Route>
             </Routes>
           </Box>
