@@ -18,7 +18,7 @@
     "@mui/material": "~5.4.3",
     "@mui/x-data-grid": "~5.10.0",
     "@netlify/functions": "~1.0.0",
-    "@prisma/client": "^4.13.0",
+    "@prisma/client": "5.22.0",
     "aws-sdk": "~2.1211.0",
     "busboy": "~1.4.0",
     "cabrillo": "~0.1.0",
@@ -40,15 +40,15 @@
     "@vitejs/plugin-react": "~1.0.7",
     "husky": "^8.0.3",
     "jest": "~27.5.1",
-    "prisma": "^4.13.0",
+    "prisma": "5.22.0",
     "ts-jest": "~27.1.5",
-    "typescript": "~4.5.4",
+    "typescript": "~4.7.4",
     "vite": "~2.9.13"
   },
   "allowScripts": {
-    "@prisma/client@4.13.0": true,
-    "@prisma/engines@4.13.0": true,
-    "prisma@4.13.0": true,
-    "esbuild@0.14.54": true
+    "esbuild@0.14.54": true,
+    "@prisma/client@5.22.0": true,
+    "@prisma/engines@5.22.0": true,
+    "prisma@5.22.0": true
   }
 }

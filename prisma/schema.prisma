@@ -4,9 +4,7 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  // rhel-openssl-3.0.x is the engine Netlify Functions (AWS Lambda, Node 20+) need
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  provider = "prisma-client-js"
 }
 
 model Contest {
