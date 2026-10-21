@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jest": "~27.5.2",
     "@types/logrocket-react": "~3.0.0",
+    "@types/node": "20.10.0",
     "@types/react": "~17.0.33",
     "@types/react-dom": "~17.0.10",
     "@vitejs/plugin-react": "~1.0.7",
@@ -43,5 +44,11 @@
     "ts-jest": "~27.1.5",
     "typescript": "~4.5.4",
     "vite": "~2.9.13"
+  },
+  "allowScripts": {
+    "@prisma/client@4.13.0": true,
+    "@prisma/engines@4.13.0": true,
+    "prisma@4.13.0": true,
+    "esbuild@0.14.54": true
   }
 }
